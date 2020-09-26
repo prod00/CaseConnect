@@ -1,0 +1,15 @@
+{% extends "case_connecting/base.html" %}
+{% block content %}
+        <article class="media content-section">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2" href="#">{{ object.recruiter }}</a>
+                  <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <h2 class="article-title">{{ object.position }}</h2>
+                  <h4>Experience with: {{ object.knowledge }}</h4>
+                  <p class="article-content">{{ object.content }}</p>
+                  <p class="article-content">Pay: {{ object.pay }}</p>
+              </div>
+            </article>
+{% endblock %}
