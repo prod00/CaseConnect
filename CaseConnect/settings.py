@@ -122,8 +122,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # where the uploaded files will be located
+MEDIA_URL = '/media/'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'case_connecting-home'
+LOGIN_REDIRECT_URL = 'case_connecting-home'  # after logging you will be directed here
 
 LOGIN_URL = 'login'
+
+

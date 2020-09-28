@@ -23,7 +23,6 @@ def register(request):
 @login_required
 def profile(request):
     username = request.user.username
-    print(username)
     context = {
         # either make usernames unique or change this to email and make email required
         'posts': Post.objects.filter(recruiter__username=username)
