@@ -1,4 +1,5 @@
 {% extends "case_connecting/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
       <div class="media">
@@ -8,6 +9,21 @@
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Profile Info
+            </legend>
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">
+                Update
+            </button>
+        </div>
+    </form>
     </div>
     {% if posts.exists %}
     <div class="content-section">
