@@ -9,10 +9,11 @@
         </div>
       </div>
     </div>
-   <div style="text-align: center;">
-
-   </div>
-    <div class="boxed">
+    {% if posts.exists %}
+    <div class="content-section">
+        <div style="text-align: center;">
+            <h1>Your Current Job Posts</h1>
+        </div>
     {% for post in posts %}
         <article class="media content-section">
               <div class="media-body">
@@ -28,4 +29,5 @@
             </article>
     {% endfor %}
     </div>
+    {% endif %}
 {% endblock %}
