@@ -3,9 +3,9 @@
    <div style="text-align: center;">
    <h1>Available Jobs</h1>
    </div>
-    {% for post in posts %}
+    {% for post in posts %} <!-- Loops through the posts -->
         <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}">
+        <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
                   <a class="mr-2" href="#">{{ post.recruiter }}</a>
@@ -17,4 +17,24 @@
               </div>
             </article>
     {% endfor %}
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            {% if page_obj.previous_page_number == 1 %}
+                <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href = "?page=1">First Page</a>
+                <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% endif %}
+        {% endif %}
+        {% if page_obj.has_next %}
+            {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+                <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+                <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.paginator.num_pages }}">Last Page</a>
+            {% endif %}
+
+        {% endif %}
+
+    {% endif %}
 {% endblock %}

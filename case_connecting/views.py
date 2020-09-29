@@ -17,7 +17,7 @@ class PostListView(ListView):
     template_name = 'case_connecting/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']  # the most recent available jobs will be moved to the top
-
+    paginate_by = 8  # the number of posts per page
 
 
 class PostDetailView(DetailView):
