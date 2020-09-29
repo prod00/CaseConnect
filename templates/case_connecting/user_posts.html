@@ -2,14 +2,14 @@
 {% block content %}
     <div class="content-section">
         <div style="text-align: center;">
-            <h1>Available Jobs</h1>
+            <h1>{{ view.kwargs.username }}'s Jobs ({{ page_obj.paginator.count }})</h1>
         </div>
         {% for post in posts %} <!-- Loops through the posts -->
             <article class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
                   <div class="media-body">
                     <div class="article-metadata">
-                      <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ post.recruiter }}</a>
+                      <a class="mr-2">{{ post.recruiter }}</a>
                       <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                     </div>
                     <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
