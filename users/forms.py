@@ -3,13 +3,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 
+
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    #username = forms.CharField()
+    first_name = forms.CharField(max_length=15)
+    last_name = forms.CharField(max_length=15)
+    email = forms.EmailField(required=True)  # username determined by email so case ID
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']  # deleted username
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(required=True)
@@ -18,7 +21,8 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['first_name', 'last_name', 'username', 'email']
+
 
 class ProfileUPdateForm(forms.ModelForm):
     class Meta:

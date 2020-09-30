@@ -3,7 +3,8 @@
         <article class="media content-section">
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2" href="#">{{ object.recruiter }}</a>
+                    <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ object.recruiter.get_full_name }}</a>
+                    <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">({{ object.recruiter.username }})</a>
                   <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
 
                 </div>

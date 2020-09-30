@@ -6,8 +6,12 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
+
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return f'{self.user.get_full_name()} Profile'
+
+    def get_full_name(self):
+        return self.get_full_name()
 
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
@@ -17,5 +21,6 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)  # resizes image to be smaller
             img.save(self.image.path)
+
 
 
