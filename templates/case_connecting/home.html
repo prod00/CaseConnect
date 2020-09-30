@@ -4,7 +4,9 @@
         <div style="text-align: center;">
             <h1>Available Jobs</h1>
         </div>
+
         {% for post in posts %} <!-- Loops through the posts -->
+            <div class="box-shadow">
             <article class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
                   <div class="media-body">
@@ -17,7 +19,9 @@
                       <p class="article-content">Pay: {{ post.pay }}</p>
                   </div>
                 </article>
+            </div>
         {% endfor %}
+
         {% if is_paginated %}
             {% if page_obj.has_previous %}
                 {% if page_obj.previous_page_number == 1 %}
