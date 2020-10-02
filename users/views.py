@@ -9,17 +9,6 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')
-            #email = form.cleaned_data.get('email')
-            #display_name = form.cleaned_data.get('display_name')
-            #username = form.cleaned_data.get('username')
-            #usernameArray = []
-            #for i in email:
-                #if i != '@':
-                    #usernameArray.append(i)
-               # else:
-                   # username = ''.join(usernameArray)
-                    #break
-            #print(display_name, username)
             form.save()
             messages.success(request, f'Welcome, {first_name}! Your account has successfully been created. You are now '
                                       f'able to log in.')

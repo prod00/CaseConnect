@@ -5,8 +5,8 @@ from .models import Profile
 
 
 class UserRegisterForm(UserCreationForm):
-    first_name = forms.CharField(max_length=15)
-    last_name = forms.CharField(max_length=15)
+    first_name = forms.CharField(max_length=15, required=True)
+    last_name = forms.CharField(max_length=15, required=True)
     email = forms.EmailField(required=True)  # username determined by email so case ID
 
     class Meta:
@@ -15,6 +15,8 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=15, required=True)
+    last_name = forms.CharField(max_length=15, required=True)
     email = forms.EmailField(required=True)
 
     # username = forms.CharField()

@@ -1,17 +1,19 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
-        <article class="media content-section">
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ object.recruiter.get_full_name }}</a>
-                    <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">({{ object.recruiter.username }})</a>
-                  <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-
+                    <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ post.recruiter.get_full_name }}</a>
+                    <a class="mr-2">({{ object.recruiter.username }})</a>
+                  <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                 </div>
-                <h2 class="article-title">{{ object.position }}</h2>
-                  <h4>Experience with: {{ object.knowledge }}</h4>
-                  <p class="article-content">{{ object.content }}</p>
-                  <p class="article-content">Pay: {{ object.pay }}</p>
+                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
+                  <h4>Experience with: {{ post.knowledge }}</h4>
+                  <div class="media content-section">
+                      <hp class="article-content">{{ object.content }}</hp>
+                  </div>
+                  <h4 class="article-content">Pay: {{ post.pay }}</h4>
               </div>
             </article>
             {% if object.recruiter == user %}

@@ -28,6 +28,14 @@ ul {
   font-weight: 500;
 }
 
+.search-bar{
+  max-width: 500px;
+  width: 100%;
+}
+form{
+  width: 100%;
+}
+
 .content-section {
   background: #ffffff;
   padding: 10px 20px;

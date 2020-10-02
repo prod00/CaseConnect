@@ -4,12 +4,21 @@ from django.views.generic import ListView, DetailView,\
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.db.models import Q
+
 
 
 # home page for case_connecting
 def home(request):
+
+    query = ""
+    if request.method == 'GET':
+        query = request.GET['q']
+
+
     context = {
-        'posts': Post.objects.all()
+        'query': str(query),
+        'posts': Post.objects.all(),
     }
     return render(request, 'case_connecting/home.html', context)
 
@@ -82,3 +91,21 @@ def about(request):
         'title': 'About'
     }
     return render(request, 'case_connecting/about.html', context)
+
+# search function
+def seach(request):
+    template = 'case_connecting/post'
+def get_case_connecting_queryset(query=None):
+    queryset = []
+    queries = query.split(" ")
+    for q in queries:
+        posts = Post.objects.filter(
+            Q(recruiter__icontains=q) |
+            Q(position__icontains=q) |
+            Q(knowledge__icontains=q)
+        ).distinct()
+
+        for post in posts:
+            queryset.append(post)
+
+        return list(set(queryset))
