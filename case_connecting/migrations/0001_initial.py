@@ -19,6 +19,8 @@ class Migration(migrations.Migration):
             name='Post',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('first_name', models.CharField(max_length=15)),
+                ('last_name', models.CharField(max_length=15)),
                 ('position', models.CharField(max_length=200)),
                 ('knowledge', models.CharField(max_length=200)),
                 ('content', models.TextField()),
