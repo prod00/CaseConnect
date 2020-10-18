@@ -1,8 +1,16 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
+<head>
+    <style>
+        div.col-md-4 {
+            display: block;
+        }
+    </style>
+</head>
     <div class="content-section">
         <div style="text-align: center;">
             <h1>Available Jobs</h1>
+            <br>
         </div>
 
         {% for post in posts %} <!-- Loops through the posts -->
@@ -41,4 +49,6 @@
 
         {% endif %}
     </div>
+
+
 {% endblock %}
