@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView,\
+from django.views.generic import ListView, DetailView, \
     CreateView, UpdateView, DeleteView
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -7,14 +7,11 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 
-
 # home page for case_connecting
 def home(request):
-
     query = ""
     if request.method == 'GET':
         query = request.GET['q']
-
 
     context = {
         'query': str(query),
@@ -40,8 +37,6 @@ class UserPostListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(recruiter=user).order_by('-date_posted')
-
-
 
 
 class PostDetailView(DetailView):
@@ -92,20 +87,17 @@ def about(request):
     }
     return render(request, 'case_connecting/about.html', context)
 
+
 # search function
-def seach(request):
-    template = 'case_connecting/post'
-def get_case_connecting_queryset(query=None):
-    queryset = []
-    queries = query.split(" ")
-    for q in queries:
-        posts = Post.objects.filter(
-            Q(recruiter__icontains=q) |
-            Q(position__icontains=q) |
-            Q(knowledge__icontains=q)
-        ).distinct()
-
-        for post in posts:
-            queryset.append(post)
-
-        return list(set(queryset))
+def search(request):
+    template = 'case_connecting/post_list.html'
+    query = request.GET.get('q')
+    posts = Post.objects.filter(Q(recruiter__username__icontains=query) |
+                                Q(recruiter__first_name__icontains=query) |
+                                Q(recruiter__last_name__icontains=query) |
+                                Q(position__icontains=query) |
+                                Q(knowledge__icontains=query))
+    context = {
+        'posts': posts
+    }
+    return render(request, template, context)

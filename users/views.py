@@ -23,7 +23,7 @@ def profile(request):
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUPdateForm(request.POST,
                                    request.FILES,
-                                   instance=request.user.profile)
+                                   instance=request.user.profile,)
 
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()

@@ -32,11 +32,12 @@
                 <a class="nav-item nav-link" href="{% url 'case_connecting-about' %}">About</a>&nbsp;&nbsp;
 
                 <!-- Search -->
-                <div class="search-bar">
-                    <form method="get">
-                      <input class="form-control" type="text" name="q" id="id_q" placeholder="Search" aria-label="Search...">
-                    </form>
-                </div>
+                <form method="get" action="{% url 'case_connecting-search' %}">
+                    <input name="q" value="{{ request.GET.q }}" placeholder="search...">
+                    <button class="btn btn-success" type="submit">
+                        Search
+                    </button>
+                </form>
 
 
             </div>
@@ -52,10 +53,6 @@
                 {% endif %}
             </div>
           </div>
-        <script type="text/javascript">
-            document.getElementById("id_q").value = "{{ query }}"
-
-        </script>
         </div>
       </nav>
     </header>
