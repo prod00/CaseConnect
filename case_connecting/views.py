@@ -124,7 +124,8 @@ def search(request):
                                 Q(recruiter__first_name__icontains=query) |
                                 Q(recruiter__last_name__icontains=query) |
                                 Q(position__icontains=query) |
-                                Q(knowledge__icontains=query))
+                                Q(knowledge__icontains=query) |
+                                Q(pay__icontains=query))
     context = {
         'posts': posts
     }
