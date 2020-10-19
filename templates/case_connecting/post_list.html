@@ -1,14 +1,28 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
-    <div class="content-section">
+<head>
+    <style>
+        article[id="user-post"] {
+            padding: 15px;
+            box-shadow: 3px 3px 3px grey;
+            background-color: #f5f5f5;
+        }
+
+        div[id="user-posting-list"] {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+    <div class="content-section" id="user-posting-list">
         <div style="text-align: center;">
-            <h1>Searched Jobs</h1>
+            <h1 style="color: #0a304e;">Searched Jobs</h1>
         </div>
 
 
 
         {% for post in posts %} <!-- Loops through the posts -->
-        <article class="media content-section">
+        <article class="media content-section" id="user-post">
         <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">

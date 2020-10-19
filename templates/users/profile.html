@@ -35,12 +35,12 @@
     </form>
     </div>
     {% if posts.exists %}
-    <div class="content-section">
+    <div class="content-section" style="background-color: #ccc;">
         <div style="text-align: center;">
-            <h1>Your Current Job Posts</h1>
+            <h1 style="color: #0a304e">Your Current Job Posts</h1>
         </div>
     {% for post in posts %}
-        <article class="media content-section">
+        <article class="media content-section" style="padding: 15px; box-shadow: 3px 3px 3px grey; background-color: #f5f5f5;">
               <div class="media-body">
                 <div class="article-metadata">
                   <a class="mr-2" href="#">{{ post.recruiter.get_full_name }}</a>

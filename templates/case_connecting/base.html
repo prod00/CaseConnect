@@ -22,6 +22,7 @@
         * {
             font-size: 100%;
             font-family: "Titillium Web",Helvetica,Arial,sans-serif;
+            color: #0a304e;
         }
 
        div.col-md-4 {
@@ -29,7 +30,7 @@
         }
 
         input[id="id_q"] {
-              width: 65px;
+              width: 300px;
               height: 10px;
               box-sizing: border-box;
               border: 2px solid #ccc;
@@ -42,7 +43,7 @@
         }
 
         input[id="id_q"]:focus {
-              width: 400px;
+
               background-color: white;
         }
 
@@ -94,15 +95,13 @@
         </div>
 
         <!-- Side Bar -->
-
-
         <div class="col-md-4">
           <div class="content-section" style="background-color: #0a304e;">
             <h3 style="color: white;">Filter</h3>
-            <p class='text-muted' style="color: white;"> Enter Key Words To Filter The Posts
+            <p style="color: #DCDCDC;"> Enter Key Words To Filter The Posts
               <ul class="list-group">
                 <form method="get" action="{% url 'case_connecting-search' %}">
-                    <input name="q" value="{{ request.GET.q }}" placeholder="Recruiter, Position, Skills, ...">
+                    <input name="q" id="id_q" value="{{ request.GET.q }}" placeholder="Recruiter, Position, Skills...">
                 </form>
               </ul>
             </p>
