@@ -96,9 +96,9 @@ class PostApplyView(UserPassesTestMixin, DetailView):
 
 @login_required
 def apply(request):
-    if request.POST.get("recruiter_email"):
+    if request.POST.get("Apply"):
         print("post")
-        request.session["email"] = request.POST["recruiter_email"]
+        request.session["email"] = request.POST["Apply"]
     print("apply", request.POST.get("Submit"))
     print("email", request.session["email"])
     if request.POST.get("Submit") and request.session["email"]:

@@ -10,7 +10,7 @@
 
     </style>
 </head>
-    <h1 style="color: #0a304e;">Apply</h1>
+    <h1 style="color: #0a304e;">Application Form</h1>
 <form method="post">
     {% csrf_token %}
     <fieldset class="form-group">
@@ -22,7 +22,9 @@
     <div class="form-group">
         <form method = "post" enctype = multipart/form-data action = "/post/apply/">
             {% csrf_token %}
-            <input type = "submit" name = "Submit" value = "submit"/>
+            <button class = "btn btn-secondary btn-sm mt-1 mb-1" type = "submit" name = "Submit" value = "submit">
+                Submit Application
+            </button>
         </form>
     </div>
 </form>
