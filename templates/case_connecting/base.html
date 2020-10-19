@@ -11,13 +11,20 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/main.css' %}">
 
+    <link href='https://fonts.googleapis.com/css?family=Titillium Web' rel='stylesheet'>
+
     {% if title %}
         <title>Case Connect - {{ title }}</title>
     {% else %}
     <title>Case Connect</title>
     {% endif %}
     <style>
-        div.col-md-4 {
+        * {
+            font-size: 100%;
+            font-family: "Titillium Web",Helvetica,Arial,sans-serif;
+        }
+
+       div.col-md-4 {
             display: none;
         }
 
@@ -27,7 +34,7 @@
               box-sizing: border-box;
               border: 2px solid #ccc;
               border-radius: 4px;
-              background-color: rgb(176, 196, 222);
+              background-color: #ccc;
               padding: 15px 5px 15px 5px;
               vertical-align: middle;
               -webkit-transition: width 0.4s ease-in-out;
@@ -44,7 +51,7 @@
 <body>
     <!-- Navbar Left Side -->
     <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #0a304e;">
         <div class="container">
           <a class="navbar-brand mr-4" href="{% url 'case_connecting-home' %}">Case Connect</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,8 +59,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-                <a class="nav-item nav-link" href="{% url 'case_connecting-home' %}">Home</a>
-                <a class="nav-item nav-link" href="{% url 'case_connecting-about' %}">About</a>&nbsp;&nbsp;
+                <a id="home-link" class="nav-item nav-link" href="{% url 'case_connecting-home' %}">Home</a>
+                <a id="about-link" class="nav-item nav-link" href="{% url 'case_connecting-about' %}">About</a>&nbsp;&nbsp;
 
                 <!-- Search -->
                 <div class="search-bar">
@@ -67,12 +74,12 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>
-                    <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
+                    <a id="create-link" class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>
+                    <a id="profile-link" class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
                 {% else %}
-                    <a class="nav-item nav-link" href="{% url 'login' %}">Log In</a>
-                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                    <a id="login-link" class="nav-item nav-link" href="{% url 'login' %}">Log In</a>
+                    <a id="register-link" class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
             </div>
           </div>
@@ -98,14 +105,14 @@
         </div>
 
         <div class="col-md-4">
-          <div class="content-section" style="background-color:rgb(176, 196, 222);">
-            <h3>Filter</h3>
-            <p class='text-muted'>Fill one or more of the boxes to filter your search
+          <div class="content-section" style="background-color: #0a304e;">
+            <h3 style="color: white;">Filter</h3>
+            <p class='text-muted' style="color: white;">Fill one or more of the boxes to filter your search
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Skills</li>
-                <li class="list-group-item list-group-item-light">Recruiter</li>
-                <li class="list-group-item list-group-item-light">Position</li>
-                <li class="list-group-item list-group-item-light">Pay</li>
+                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Skills</li>
+                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Recruiter</li>
+                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Position</li>
+                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Pay</li>
               </ul>
             </p>
           </div>

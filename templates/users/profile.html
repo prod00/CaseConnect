@@ -1,6 +1,15 @@
 {% extends "case_connecting/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<head>
+    <style>
+        a[id="profile-link"] {
+            background-color: #555;
+            color: white;
+        }
+
+    </style>
+</head>
     <div class="content-section">
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
