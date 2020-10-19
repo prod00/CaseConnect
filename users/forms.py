@@ -30,3 +30,7 @@ class ProfileUPdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+#class ApplyForm(forms.ModelForm):
+    #reason, resume, contact_info
+

@@ -5,7 +5,7 @@ from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
-
+from django.core.mail import send_mail
 
 # home page for case_connecting
 def home(request):
@@ -79,6 +79,27 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         else:
             return False
 
+class PostApplyView(UserPassesTestMixin, DetailView):
+    model = Post
+    template_name = 'case_connecting/apply.html'
+
+    def test_func(self):
+        post = self.get_object()
+        if apply(self.request):
+            if self.request.user != post.recruiter:
+                send_mail(post.getPosition(), 'interested', 'CaseConnect2020@gmail.com', [str(post.recruiter.email)])
+                return True
+            else:
+                return False
+
+
+def apply(request):
+    if request.method == "POST":
+        print("hello")
+        return True
+    else:
+        return False
+
 
 # about page for case_connecting
 def about(request):
@@ -101,3 +122,7 @@ def search(request):
         'posts': posts
     }
     return render(request, template, context)
+
+
+
+

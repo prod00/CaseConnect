@@ -21,5 +21,9 @@
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Edit</a>
                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
                 </div>
-            {% endif %}
+            {% else %}
+               <div>
+                  <a class = "btn btn-secondary btn-sm mt-1 mb-1" href = {% url 'post-apply' object.id %}>Apply</a>
+               </div>
+           {% endif %}
 {% endblock %}

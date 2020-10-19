@@ -1,0 +1,27 @@
+{% extends "case_connecting/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<head>
+    <style>
+        a[id="about-link"] {
+            background-color: #555;
+            color: white;
+        }
+
+    </style>
+</head>
+    <h1 style="color: #0a304e;">Apply</h1>
+<form method="post">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">
+            Position: {{ post.position }}
+        </legend>
+        {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+        <input type = "submit" name = "Submit" value = "submit" class = "button-lg"/>
+    </div>
+</form>
+</div>
+{% endblock %}

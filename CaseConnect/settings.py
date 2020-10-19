@@ -131,4 +131,9 @@ LOGIN_REDIRECT_URL = 'case_connecting-home'  # after logging you will be directe
 
 LOGIN_URL = 'login'
 
-
+#Email Settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'CaseConnect2020@gmail.com'
+EMAIL_HOST_PASSWORD = 'ILuvPodgurski'
+EMAIL_USE_TLS = True
