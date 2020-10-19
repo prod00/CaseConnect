@@ -16,6 +16,30 @@
     {% else %}
     <title>Case Connect</title>
     {% endif %}
+    <style>
+        div.col-md-4 {
+            display: none;
+        }
+
+        input[id="id_q"] {
+              width: 65px;
+              height: 10px;
+              box-sizing: border-box;
+              border: 2px solid #ccc;
+              border-radius: 4px;
+              background-color: rgb(176, 196, 222);
+              padding: 15px 5px 15px 5px;
+              vertical-align: middle;
+              -webkit-transition: width 0.4s ease-in-out;
+              transition: width 0.4s ease-in-out;
+        }
+
+        input[id="id_q"]:focus {
+              width: 400px;
+              background-color: white;
+        }
+
+    </style>
 </head>
 <body>
     <!-- Navbar Left Side -->
@@ -44,8 +68,8 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'post-create' %}">Post</a>
-                    <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                    <a class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>
+                    <a class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
                 {% else %}
                     <a class="nav-item nav-link" href="{% url 'login' %}">Log In</a>
@@ -56,6 +80,7 @@
         </div>
       </nav>
     </header>
+
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
@@ -68,8 +93,9 @@
         {% endif %}
             {% block content %}{% endblock %}
         </div>
+
         <div class="col-md-4">
-          <div class="content-section">
+          <div class="content-section" style="background-color:rgb(176, 196, 222);">
             <h3>Filter</h3>
             <p class='text-muted'>Fill one or more of the boxes to filter your search
               <ul class="list-group">
@@ -91,5 +117,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
-</body>
 </html>
