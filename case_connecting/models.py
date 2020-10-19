@@ -15,7 +15,9 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.recruiter, self.position, self.date_posted.date()
+        template = '{0.recruiter} {0.position}'
+        #return self.recruiter, self.position, self.date_posted.date()
+        return template.format(self)
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
