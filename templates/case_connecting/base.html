@@ -62,14 +62,6 @@
                 <a id="home-link" class="nav-item nav-link" href="{% url 'case_connecting-home' %}">Home</a>
                 <a id="about-link" class="nav-item nav-link" href="{% url 'case_connecting-about' %}">About</a>&nbsp;&nbsp;
 
-                <!-- Search -->
-                <form method="get" action="{% url 'case_connecting-search' %}">
-                    <input name="q" value="{{ request.GET.q }}" placeholder="search...">
-                    <button class="btn btn-success" type="submit">
-                        Search
-                    </button>
-                </form>
-
 
             </div>
             <!-- Navbar Right Side -->
@@ -101,15 +93,17 @@
             {% block content %}{% endblock %}
         </div>
 
+        <!-- Side Bar -->
+
+
         <div class="col-md-4">
           <div class="content-section" style="background-color: #0a304e;">
             <h3 style="color: white;">Filter</h3>
-            <p class='text-muted' style="color: white;">Fill one or more of the boxes to filter your search
+            <p class='text-muted' style="color: white;"> Enter Key Words To Filter The Posts
               <ul class="list-group">
-                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Skills</li>
-                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Recruiter</li>
-                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Position</li>
-                <li class="list-group-item list-group-item-light" style="background-color: #ccc; color: #0a304e;">Pay</li>
+                <form method="get" action="{% url 'case_connecting-search' %}">
+                    <input name="q" value="{{ request.GET.q }}" placeholder="Recruiter, Position, Skills, ...">
+                </form>
               </ul>
             </p>
           </div>
