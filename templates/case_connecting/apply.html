@@ -20,7 +20,10 @@
         {{ form|crispy }}
     </fieldset>
     <div class="form-group">
-        <input type = "submit" name = "Submit" value = "submit" class = "button-lg"/>
+        <form method = "post" enctype = multipart/form-data action = "/post/apply/">
+            {% csrf_token %}
+            <input type = "submit" name = "Submit" value = "submit"/>
+        </form>
     </div>
 </form>
 </div>

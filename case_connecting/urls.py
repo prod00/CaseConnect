@@ -11,6 +11,6 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name="post-create"),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name="post-update"),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name="post-delete"),
-    path('post/<int:pk>/apply/', PostApplyView.as_view(), name = "post-apply"),
+    path('post/apply/', views.apply, name = "post-apply"),
     path('about/', views.about, name="case_connecting-about"),
 ]

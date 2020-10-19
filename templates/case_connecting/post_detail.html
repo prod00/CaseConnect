@@ -23,7 +23,11 @@
                 </div>
             {% else %}
                <div>
-                  <a class = "btn btn-secondary btn-sm mt-1 mb-1" href = {% url 'post-apply' object.id %}>Apply</a>
+                   {# <a class = "btn btn-secondary btn-sm mt-1 mb-1" href = {% url 'post-apply' %}>Apply</a> #}
+                   <form method = "post" enctype = multipart/form-data action = "/post/apply/">
+                       {% csrf_token %}
+                       <input type = "submit" name = "recruiter_email" value = "{{ post.recruiter.email }}" href = {% url 'post-apply' %}/>
+                   </form>
                </div>
            {% endif %}
 {% endblock %}

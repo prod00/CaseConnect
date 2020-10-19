@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, \
     CreateView, UpdateView, DeleteView
 from .models import Post
@@ -9,6 +10,7 @@ from django.core.mail import send_mail
 
 # home page for case_connecting
 def home(request):
+    request.session["email"] = None
     query = ""
     if request.method == 'GET':
         query = request.GET['q']
@@ -92,13 +94,18 @@ class PostApplyView(UserPassesTestMixin, DetailView):
             else:
                 return False
 
-
+@login_required
 def apply(request):
-    if request.method == "POST":
-        print("hello")
-        return True
-    else:
-        return False
+    if request.POST.get("recruiter_email"):
+        print("post")
+        request.session["email"] = request.POST["recruiter_email"]
+    print("apply", request.POST.get("Submit"))
+    print("email", request.session["email"])
+    if request.POST.get("Submit") and request.session["email"]:
+        print("works")
+        send_mail('d', 'interested', 'CaseConnect2020@gmail.com', [str(request.session["email"])])
+        return redirect('case_connecting-home')
+    return render(request, 'case_connecting/apply.html')
 
 
 # about page for case_connecting
