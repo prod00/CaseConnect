@@ -15,11 +15,10 @@ class Post(models.Model):
 
     def __str__(self):
         template = '{0.recruiter} {0.position}'
-        #return self.recruiter, self.position, self.date_posted.date()
+        # return self.recruiter, self.position, self.date_posted.date()
         return template.format(self)
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
-
     def getPosition(self):
         return self.position
