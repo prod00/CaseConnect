@@ -1,4 +1,5 @@
 {% extends "case_connecting/base.html" %}
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% block content %}
 <head>
@@ -15,7 +16,7 @@
     {% csrf_token %}
     <fieldset class="form-group">
         <legend class="border-bottom mb-4">
-            Position: {{ post.position }}
+            Position: {{ apply_post.position }} for {{ apply_post.recruiter.get_full_name }}
         </legend>
         {{ form|crispy }}
     </fieldset>

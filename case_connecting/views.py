@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.core.mail import send_mail
+from django.contrib import messages
 
 # home page for case_connecting
 def home(request):
@@ -96,16 +97,28 @@ class PostApplyView(UserPassesTestMixin, DetailView):
 
 @login_required
 def apply(request):
+    context = {}
     if request.POST.get("Apply"):
         print("post")
-        request.session["email"] = request.POST["Apply"]
+        request.session["id"] = request.POST["Apply"]
+        apply_post = Post.objects.get(pk=request.session["id"])
+        context["apply_post"] = apply_post
+
     print("apply", request.POST.get("Submit"))
-    print("email", request.session["email"])
-    if request.POST.get("Submit") and request.session["email"]:
+    print("id", request.session["id"])
+    if request.POST.get("Submit") and request.session["id"]:
         print("works")
-        send_mail('d', 'interested', 'CaseConnect2020@gmail.com', [str(request.session["email"])])
+        id_num = int(request.session["id"])
+        post = Post.objects.get(pk=id_num)
+        email = str(post.recruiter.email)
+        position = post.position
+        recruiter_name = post.recruiter.get_full_name()
+        applicant_name = request.user.get_full_name()
+        email_subject = applicant_name + " has applied to your " + position + " position!"
+        send_mail(email_subject, 'interested', 'CaseConnect2020@gmail.com', [email])
+        messages.success(request, f'You have successfully applied to be a {position} for {recruiter_name}!')
         return redirect('case_connecting-home')
-    return render(request, 'case_connecting/apply.html')
+    return render(request, 'case_connecting/apply.html', context)
 
 
 # about page for case_connecting
