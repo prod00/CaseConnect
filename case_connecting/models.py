@@ -14,7 +14,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        template = '{0.recruiter} {0.position}'
+        template = 'Recruiter: {0.recruiter}, Position: {0.position}'
         #return self.recruiter, self.position, self.date_posted.date()
         return template.format(self)
 
@@ -23,3 +23,18 @@ class Post(models.Model):
 
     def getPosition(self):
         return self.position
+
+
+class Application(models.Model):
+    applicant = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        template = 'Applicant: {0.applicant}, Post: ({0.post})'
+        return template.format(self)
+
+    def get_absolute_url(self):
+        return reverse('case_connecting-home')
+
+

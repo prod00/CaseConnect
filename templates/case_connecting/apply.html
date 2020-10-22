@@ -1,32 +1,28 @@
 {% extends "case_connecting/base.html" %}
-{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 {% block content %}
 <head>
     <style>
-        a[id="about-link"] {
+        a[id="register-link"] {
             background-color: #555;
             color: white;
         }
 
     </style>
 </head>
-    <h1 style="color: #0a304e;">Application Form</h1>
+<div class="content-section">
 <form method="post">
     {% csrf_token %}
     <fieldset class="form-group">
         <legend class="border-bottom mb-4">
-            Position: {{ apply_post.position }} for {{ apply_post.recruiter.get_full_name }}
+            Application
         </legend>
         {{ form|crispy }}
     </fieldset>
     <div class="form-group">
-        <form method = "post" enctype = multipart/form-data action = "/post/apply/">
-            {% csrf_token %}
-            <button class = "btn btn-secondary btn-sm mt-1 mb-1" type = "submit" name = "Submit" value = "submit">
-                Submit Application
-            </button>
-        </form>
+        <button class="btn btn-outline-info" type="submit">
+            Submit
+        </button>
     </div>
 </form>
 </div>

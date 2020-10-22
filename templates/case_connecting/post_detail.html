@@ -24,9 +24,9 @@
             {% else %}
                <div>
                    {# <a class = "btn btn-secondary btn-sm mt-1 mb-1" href = {% url 'post-apply' %}>Apply</a> #}
-                   <form method = "post" enctype = multipart/form-data action = "/post/apply/">
+                   <form method = "post" enctype = multipart/form-data action="apply/">
                        {% csrf_token %}
-                       <button class = "btn btn-secondary btn-sm mt-1 mb-1" type = "submit" name = "Apply" value = "{{ post.id }}" href = {% url 'post-apply' %}>
+                       <button class = "btn btn-secondary btn-sm mt-1 mb-1" type = "submit" name = "Apply" href = {% url 'post-apply' object.id %}>
                            Apply
                        </button>
                    </form>

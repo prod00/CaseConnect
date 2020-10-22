@@ -1,6 +1,5 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
-
 <head>
     <style>
         div.col-md-4 {
@@ -25,21 +24,20 @@
 </head>
     <div class="content-section" id="posting-list">
         <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Available Jobs</h1>
+            <h1 style="color: #0a304e;">Your Applications</h1>
             <br>
         </div>
 
-        {% for post in posts %} <!-- Loops through the posts -->
+        {% for application in applications %} <!-- Loops through the posts -->
         <article id="post" class="media content-section">
-        <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ post.recruiter.get_full_name }}</a>
-                  <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                  <a class="mr-2" href="{% url 'user-posts' application.post.recruiter %}">To: {{ application.post.recruiter.get_full_name }}</a>
                 </div>
-                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
-                  <h4>Experience with: {{ post.knowledge }}</h4>
-                  <p class="article-content">Pay: {{ post.pay }}</p>
+                <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h2>
+                  <div class="media content-section">
+                    <h4>{{ application.message }}</h4>
+                  </div>
               </div>
             </article>
         {% endfor %}
