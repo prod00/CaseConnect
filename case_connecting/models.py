@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
+
 class Post(models.Model):
     # things to add: deadline, how many people applied, user name
     recruiter = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -20,5 +21,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
     def getPosition(self):
         return self.position
