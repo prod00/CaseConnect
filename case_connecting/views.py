@@ -87,11 +87,12 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class PostApplyView(LoginRequiredMixin, CreateView):
     model = Application
     template_name = 'case_connecting/apply.html'
-    fields = ['message', 'post']
+    fields = ['message']
 
     def form_valid(self, form):
         form.instance.applicant = self.request.user
-        #form.instance.post = Post.objects.get(id(Post))
+        post_id = get_object_or_404(Post, pk=self.kwargs.get('pk'))
+        form.instance.post = Post.objects.get(pk=post_id.id)
         return super().form_valid(form)
 
 class PostApplicationsListView(ListView):

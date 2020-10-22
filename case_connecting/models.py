@@ -14,7 +14,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        template = 'Recruiter: {0.recruiter}, Position: {0.position}'
+        template = 'Recruiter: {0.recruiter}, Position: {0.position}, Post Date: {date_posted}'
         #return self.recruiter, self.position, self.date_posted.date()
         return template.format(self)
 
@@ -29,9 +29,10 @@ class Application(models.Model):
     applicant = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.TextField()
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    date_applied = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        template = 'Applicant: {0.applicant}, Post: ({0.post})'
+        template = 'Applicant: {0.applicant}, Post: ({0.post}), Application Date: {0.date_applied}'
         return template.format(self)
 
     def get_absolute_url(self):
