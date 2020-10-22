@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.core.mail import send_mail
-
+#work
 # home page for case_connecting
 def home(request):
     request.session["email"] = None
@@ -103,7 +103,7 @@ def apply(request):
     print("email", request.session["email"])
     if request.POST.get("Submit") and request.session["email"]:
         print("works")
-        send_mail('d', 'interested', 'CaseConnect2020@gmail.com', [str(request.session["email"])])
+        send_mail('Application', '(Username) is Interested', 'CaseConnect2020@gmail.com', [str(request.session["email"])])
         return redirect('case_connecting-home')
     return render(request, 'case_connecting/apply.html')
 
