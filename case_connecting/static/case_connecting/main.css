@@ -109,7 +109,7 @@ div[id="posting-list"] {
    border: none;
 }
 
-.col {
+.d-flex {
   border: 1px solid grey;
   border-radius: 2px;
   padding: 10px 10px;

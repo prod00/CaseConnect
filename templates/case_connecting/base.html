@@ -51,16 +51,12 @@
             <div class="navbar-nav mr-auto">
                 <a id="home-link" class="nav-item nav-link" href="{% url 'case_connecting-home' %}">Home</a>&nbsp;
                 <a id="about-link" class="nav-item nav-link" href="{% url 'case_connecting-about' %}">About</a>&nbsp;
-                {% if user.is_authenticated %}
-                    <a id="applications-link" class="nav-item nav-link" href="{% url 'case_connecting-applications' user.username %}">Applications</a>
-                {% endif %}
 
 
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <a id="applicants-link" class="nav-item nav-link" href="{% url 'case_connecting-applicants' user.username %}">Your Applicants</a>&nbsp;
                     <a id="activity-link" class="nav-item nav-link" href="{% url 'case_connecting-activity' user.username %}">Activity</a>&nbsp;
                     <a id="create-link" class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>&nbsp;
                     <a id="profile-link" class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>&nbsp;
