@@ -28,15 +28,21 @@
             <br>
         </div>
 
+        {% if not applications %}
+            <div style="text-align: center;">
+                <h2>No Applications Have Been Received</h2>
+            </div>
+        {% endif %}
+
         {% for application in applications %} <!-- Loops through the posts -->
         <article id="post" class="media content-section">
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2" href="{% url 'user-posts' application.applicant %}">From: {{ application.applicant.get_full_name }}</a>
+                  <a class="mr-2">From: {{ application.applicant.get_full_name }}</a>
                 </div>
                 <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h2>
                   <div class="media content-section">
-                    <h4>{{ application.message }}</h4>
+                    <p>{{ application.message }}</p>
                   </div>
               </div>
             </article>

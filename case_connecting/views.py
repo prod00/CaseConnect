@@ -98,68 +98,23 @@ class PostApplyView(LoginRequiredMixin, CreateView):
 class PostApplicationsListView(ListView):
     model = Application
     context_object_name = 'applications'
-    #ordering = ['-date_posted']  # the most recent available jobs will be moved to the top
-    #paginate_by = 8  # the number of posts per page
+    paginate_by = 8  # the number of posts per page
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Application.objects.filter(applicant=user)
+        return Application.objects.filter(applicant=user).order_by('-date_applied')
 
 
 class PostApplicantsListView(ListView):
     model = Application
     context_object_name = 'applications'
+    paginate_by = 8
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Application.objects.filter(post__recruiter=user)
+        return Application.objects.filter(post__recruiter=user).order_by('-date_applied')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @login_required
-# def apply(request):
-#     context = {}
-#     if request.POST.get("Apply"):
-#         request.session["id"] = request.POST["Apply"]
-#         apply_post = Post.objects.get(pk=request.session["id"])
-#         context["apply_post"] = apply_post
-#
-#     if request.POST.get("Submit") and request.session["id"]:
-#         form = ApplicationForm(request.POST)
-#         print("form saved")
-#         if form.is_valid():
-#             print("form was valid")
-#             id_num = int(request.session["id"])
-#             post = Post.objects.get(pk=id_num)
-#             email_body = str(request.POST['message'])
-#             recruiter_email = str(post.recruiter.email)
-#             position = post.position
-#             recruiter_name = post.recruiter.get_full_name()
-#             applicant_name = request.user.get_full_name()
-#             email_subject = applicant_name + " has applied to your " + position + " position!"
-#             send_mail(email_subject, email_body, 'CaseConnect2020@gmail.com', [recruiter_email])
-#             messages.success(request, f'You have successfully applied to be a {position} for {recruiter_name}!')
-#             return redirect('case_connecting-home')
-#         else:
-#             messages.warning(request, "The Message You Are Trying To Send Is Not Valid")
-#     if bool(context):
-#         return render(request, 'case_connecting/apply.html', context)
-#     else:
-#         return redirect('case_connecting-home')
-
-# about page for case_connecting
 def about(request):
     context = {
         'title': 'About'
