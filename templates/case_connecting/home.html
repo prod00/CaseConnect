@@ -3,69 +3,70 @@
 
 <head>
     <style>
-        div.col-md-4 {
-            display: block;
-        }
-        article[id="post"] {
-            padding: 15px;
-            box-shadow: 3px 3px 3px grey;
-            background-color: #f5f5f5;
-        }
-
-        div[id="posting-list"] {
-            background-color: #ccc;
-            border: none;
-        }
-
         a[id="home-link"] {
             background-color: #555;
             color: white;
         }
-
     </style>
 </head>
-    <div class="content-section" id="posting-list">
-        <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Available Jobs</h1>
-            <br>
-        </div>
 
-        {% for post in posts %} <!-- Loops through the posts -->
-        <article id="post" class="media content-section">
-        <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
-              <div class="media-body">
-                <div class="article-metadata">
-                  <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ post.recruiter.get_full_name }}</a>
-                  <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+<div class="content-section" id="posting-list">
+    <div class="row">
+        <div class="col-md-8">
+            <div style="text-align: center;">
+                <h1 style="color: #0a304e;">Available Jobs</h1>
+                <br>
+            </div>
+
+            {% for post in posts %} <!-- Loops through the posts -->
+            <article id="post" class="media content-section">
+                <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ post.recruiter.get_full_name }}</a>
+                        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
+                    <h4>Experience with: {{ post.knowledge }}</h4>
+                    <p class="article-content">Pay: {{ post.pay }}</p>
                 </div>
-                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
-                  <h4>Experience with: {{ post.knowledge }}</h4>
-                  <p class="article-content">Pay: {{ post.pay }}</p>
-              </div>
             </article>
-        {% endfor %}
+            {% endfor %}
 
-        {% if is_paginated %}
+            {% if is_paginated %}
             {% if page_obj.has_previous %}
-                {% if page_obj.previous_page_number == 1 %}
-                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
-                {% else %}
-                    <a class="btn btn-outline-info mb-4" href = "?page=1">First Page</a>
-                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
-                {% endif %}
+            {% if page_obj.previous_page_number == 1 %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% else %}
+            <a class="btn btn-outline-info mb-4" href = "?page=1">First Page</a>
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% endif %}
             {% endif %}
             {% if page_obj.has_next %}
-                {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
-                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
-                {% else %}
-                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
-                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.paginator.num_pages }}">Last Page</a>
-                {% endif %}
-
+            {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+            {% else %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.paginator.num_pages }}">Last Page</a>
             {% endif %}
+            {% endif %}
+            {% endif %}
+        </div>
 
-        {% endif %}
+        <div class="col-md-4">
+            <div class="content-section" style="background-color: #0a304e; border: none; box-shadow: 3px 3px 3px black;">
+                <h3 style="color: white;">Filter</h3>
+                <p style="color: #DCDCDC;"> Enter Key Words To Filter The Posts
+                <ul class="list-group">
+                    <form method="get" action="{% url 'case_connecting-search' %}">
+                        <input name="q" id="id_q" value="{{ request.GET.q }}" placeholder="Recruiter, Position, Skills...">
+                    </form>
+                </ul>
+                </p>
+            </div>
+        </div>
     </div>
+</div>
 
 
 {% endblock %}

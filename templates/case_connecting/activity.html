@@ -1,0 +1,116 @@
+{% extends "case_connecting/base.html" %}
+{% block content %}
+<head>
+    <style>
+        a[id="activity-link"] {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+
+<div class="row">
+    <div class="col">
+        <div class="content-section" id="posting-list">
+            <div style="text-align: center;">
+                <h1 style="color: #0a304e;">Your Applications</h1>
+                <br>
+            </div>
+
+            {% if not applications %}
+            <div style="text-align: center;">
+                <h2>No Applications Have Been Sent</h2>
+            </div>
+            {% endif %}
+
+
+
+            {% for application in applications %} <!-- Loops through the posts -->
+            <article id="post" class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="{% url 'user-posts' application.post.recruiter %}">To: {{ application.post.recruiter.get_full_name }}</a>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h2>
+                    <div class="media content-section">
+                        <p>{{ application.message }}</p>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+
+            {% if is_paginated %}
+            {% if page_obj.has_previous %}
+            {% if page_obj.previous_page_number == 1 %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% else %}
+            <a class="btn btn-outline-info mb-4" href = "?page=1">First Page</a>
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% endif %}
+            {% endif %}
+            {% if page_obj.has_next %}
+            {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+            {% else %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.paginator.num_pages }}">Last Page</a>
+            {% endif %}
+
+            {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="content-section" id="posting-list">
+            <div style="text-align: center;">
+                <h1 style="color: #0a304e;">Your Applicants</h1>
+                <br>
+            </div>
+
+            {% if not applications %}
+            <div style="text-align: center;">
+                <h2>No Applications Have Been Received</h2>
+            </div>
+            {% endif %}
+
+            {% for application in applications %} <!-- Loops through the posts -->
+            <article id="post" class="media content-section">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2">From: {{ application.applicant.get_full_name }}</a>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h2>
+                    <div class="media content-section">
+                        <p>{{ application.message }}</p>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+
+            {% if is_paginated %}
+            {% if page_obj.has_previous %}
+            {% if page_obj.previous_page_number == 1 %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% else %}
+            <a class="btn btn-outline-info mb-4" href = "?page=1">First Page</a>
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+            {% endif %}
+            {% endif %}
+            {% if page_obj.has_next %}
+            {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+            {% else %}
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+            <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.paginator.num_pages }}">Last Page</a>
+            {% endif %}
+
+            {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
