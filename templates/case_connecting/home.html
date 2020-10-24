@@ -7,6 +7,21 @@
             background-color: #555;
             color: white;
         }
+
+        input[id="id_q"] {
+              width: 100%;
+              height: 10px;
+              box-sizing: border-box;
+              border: 2px solid #ccc;
+              border-radius: 4px;
+              background-color: #ccc;
+              padding: 15px 5px 15px 5px;
+              vertical-align: middle;
+        }
+
+        input[id="id_q"]:focus {
+              background-color: white;
+        }
     </style>
 </head>
 
@@ -54,7 +69,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="content-section" style="background-color: #0a304e; border: none; box-shadow: 3px 3px 3px black;">
+            <div class="content-section" id="filter" style="background-color: #0a304e; border: none; box-shadow: 3px 3px 3px black;">
                 <h3 style="color: white;">Filter</h3>
                 <p style="color: #DCDCDC;"> Enter Key Words To Filter The Posts
                 <ul class="list-group">

@@ -116,3 +116,7 @@ div[id="posting-list"] {
   margin: 10px 10px;
   box-shadow: 3px 3px 3px grey;
 }
+
+div[id_q] {
+  width: 75%;
+}

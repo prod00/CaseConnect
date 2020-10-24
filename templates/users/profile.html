@@ -10,7 +10,7 @@
 
     </style>
 </head>
-    <div class="content-section">
+    <div class="content-section" style="background-color: #ccc; border: none;">
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         <div class="media-body">
@@ -49,7 +49,6 @@
                 <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
                   <h4>Experience with: {{ post.knowledge }}</h4>
                   <p class="article-content">Pay: {{ post.pay }}</p>
-
               </div>
             </article>
     {% endfor %}
