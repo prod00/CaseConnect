@@ -15,6 +15,6 @@ urlpatterns = [
     path('applications/<str:username>/', PostApplicationsListView.as_view(template_name='case_connecting/applications_page.html'), name="case_connecting-applications"),
     path('applicants/<str:username>/', PostApplicantsListView.as_view(template_name='case_connecting/applicants.html'), name="case_connecting-applicants"),
     path('about/', views.about, name="case_connecting-about"),
-    path('activity/<str:username>/', PostApplicantsListView.as_view(template_name='case_connecting/activity.html'), name="case_connecting-activity"),
+
 
 ]

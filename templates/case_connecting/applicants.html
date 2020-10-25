@@ -1,5 +1,12 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
+    <!-- Side navigation -->
+    <div class="sidenav">
+      <a href="{% url 'case_connecting-applications' user.username %}">Applications</a>
+      <a href="{% url 'case_connecting-applicants' user.username %}">Applicants</a>
+      <a href="#">Bookmarked</a>
+    </div>
+
 <head>
     <style>
         a[id="applicants-link"] {

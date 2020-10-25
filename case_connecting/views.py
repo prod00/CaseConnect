@@ -121,6 +121,12 @@ def about(request):
     }
     return render(request, 'case_connecting/about.html', context)
 
+def activity(request):
+    context = {
+        'title': 'Activity'
+    }
+    return render(request, 'case_connecting/activity.html', context)
+
 
 # search function
 def search(request):
