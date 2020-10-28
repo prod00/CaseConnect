@@ -31,7 +31,7 @@
 
 
         {% for application in applications %} <!-- Loops through the posts -->
-        <article id="post" class="media content-section"  style="width: 75%;" align="left">
+        <article id="post" class="media content-section" align="left">
               <div class="media-body">
                 <div class="article-metadata">
                   <a class="mr-2" href="{% url 'user-posts' application.post.recruiter %}">To: {{ application.post.recruiter.get_full_name }}</a>

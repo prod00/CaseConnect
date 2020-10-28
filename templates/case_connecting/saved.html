@@ -15,7 +15,7 @@
         }
     </style>
 </head>
-    <div class="content-section" id="posting-list">
+    <div class="content-section" id="posting-list" align="center">
         <div style="text-align: center;">
             <h1 style="color: #0a304e;">Your Saved Posts</h1>
             <br>
@@ -28,7 +28,7 @@
         {% endif %}
 
         {% for saved_post in saved_posts %} <!-- Loops through the posts -->
-        <article class="media content-section" id="post">
+        <article class="media content-section" id="post" align="left">
         <img class="rounded-circle article-img" src="{{ saved_post.post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
