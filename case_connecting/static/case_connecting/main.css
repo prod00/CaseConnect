@@ -124,30 +124,31 @@ div[id_q] {
 
 /* The sidebar menu */
 .sidenav {
-  height: 50%;
-
-  width: 160px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 9%; /* Stay at the top */
   left: 1%;
-  background-color: #0a304e; /* Black */
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
+  padding: 20px 10px 20px 5px;
 }
 
 /* The navigation menu links */
 .sidenav a {
-  padding: 6px 8px 6px 16px;
+  padding: 6px 16px 6px 16px;
+  margin: 12px 8px 6px 16px;
+  border-radius: 2px;
+  box-shadow: 3px 3px 3px grey;
+  background-color: #0a304e; /* Black */
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: white;
   display: block;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
   color: #f1f1f1;
+  background-color: #003399;
 }
 
 /* Style page content */

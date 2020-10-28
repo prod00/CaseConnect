@@ -1,5 +1,13 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
+<head>
+    <style>
+        a[id="activity-link"] {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
 
     <!-- Side navigation -->
     <div class="sidenav">
@@ -8,16 +16,7 @@
       <a href="{% url 'case_connecting-saved' user.username %}">Saved</a>
     </div>
 
-<head>
-    <style>
-        a[id="applications-link"] {
-            background-color: #555;
-            color: white;
-        }
-
-    </style>
-</head>
-    <div class="content-section" id="posting-list">
+    <div class="content-section" id="posting-list" align="center">
         <div style="text-align: center;">
             <h1 style="color: #0a304e;">Your Applications</h1>
             <br>
@@ -32,7 +31,7 @@
 
 
         {% for application in applications %} <!-- Loops through the posts -->
-        <article id="post" class="media content-section">
+        <article id="post" class="media content-section"  style="width: 75%;" align="left">
               <div class="media-body">
                 <div class="article-metadata">
                   <a class="mr-2" href="{% url 'user-posts' application.post.recruiter %}">To: {{ application.post.recruiter.get_full_name }}</a>
@@ -66,6 +65,5 @@
 
         {% endif %}
     </div>
-
 
 {% endblock %}
