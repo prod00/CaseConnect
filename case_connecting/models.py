@@ -39,3 +39,17 @@ class Application(models.Model):
         return reverse('case_connecting-home')
 
 
+class Save(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    date_saved = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        template = 'User: {0.user}, Post: [{0.post}]'
+        return template.format(self)
+
+    def get_absolute_url(self):
+        return reverse('case_connecting-home')
+
+
+

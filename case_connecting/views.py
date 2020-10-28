@@ -1,14 +1,14 @@
-from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, \
     CreateView, UpdateView, DeleteView
-from .models import Post, Application
+from .models import Post, Application, Save
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
+
 from django.core.mail import send_mail
 from django.contrib import messages
-from .forms import ApplicationForm
 
 
 # home page for case_connecting
@@ -95,6 +95,7 @@ class PostApplyView(LoginRequiredMixin, CreateView):
         form.instance.post = Post.objects.get(pk=post_id.id)
         return super().form_valid(form)
 
+
 class PostApplicationsListView(ListView):
     model = Application
     context_object_name = 'applications'
@@ -114,18 +115,36 @@ class PostApplicantsListView(ListView):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Application.objects.filter(post__recruiter=user).order_by('-date_applied')
 
+class SaveView(LoginRequiredMixin, CreateView):
+    model = Save
+    template_name = 'case_connecting/save_form.html'
+    fields = []
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        post_id = get_object_or_404(Post, pk=self.kwargs.get('pk'))
+        form.instance.post = Post.objects.get(pk=post_id.id)
+        super().form_valid(form)
+        return redirect('/post/'+str(post_id.id))
+
+
+
+
+class SavedListView(ListView):
+    model = Save
+    context_object_name = 'saved_posts'
+    paginate_by = 8
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Save.objects.filter(user=user).order_by('-date_saved')
+
 
 def about(request):
     context = {
         'title': 'About'
     }
     return render(request, 'case_connecting/about.html', context)
-
-def activity(request):
-    context = {
-        'title': 'Activity'
-    }
-    return render(request, 'case_connecting/activity.html', context)
 
 
 # search function
@@ -142,3 +161,5 @@ def search(request):
         'posts': posts
     }
     return render(request, template, context)
+
+

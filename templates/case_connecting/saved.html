@@ -17,26 +17,27 @@
 </head>
     <div class="content-section" id="posting-list">
         <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Your Applicants</h1>
+            <h1 style="color: #0a304e;">Your Saved Posts</h1>
             <br>
         </div>
 
-        {% if not applications %}
+        {% if not saved_posts %}
             <div style="text-align: center;">
-                <h2>No Applications Have Been Received</h2>
+                <h2>No Posts Are Saved</h2>
             </div>
         {% endif %}
 
-        {% for application in applications %} <!-- Loops through the posts -->
-        <article id="post" class="media content-section">
+        {% for saved_post in saved_posts %} <!-- Loops through the posts -->
+        <article class="media content-section" id="post">
+        <img class="rounded-circle article-img" src="{{ saved_post.post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2">From: {{ application.applicant.get_full_name }}</a>
+                  <a class="mr-2" href="{% url 'user-posts' saved_post.post.recruiter.username %}">{{ saved_post.post.recruiter.get_full_name }}</a>
+                  <small class="text-muted">{{ saved_post.post.date_posted|date:"F d, Y" }}</small>
                 </div>
-                <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h2>
-                  <div class="media content-section">
-                    <p>{{ application.message }}</p>
-                  </div>
+                <h2><a class="article-title" href="{% url 'post-detail' saved_post.post.id %}">{{ saved_post.post.position }}</a></h2>
+                  <h4>Experience with: {{ saved_post.post.knowledge }}</h4>
+                  <p class="article-content">Pay: {{ saved_post.post.pay }}</p>
               </div>
             </article>
         {% endfor %}

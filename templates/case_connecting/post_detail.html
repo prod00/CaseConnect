@@ -7,6 +7,9 @@
                     <a class="mr-2" href="{% url 'user-posts' post.recruiter.username %}">{{ post.recruiter.get_full_name }}</a>
                     <a class="mr-2">({{ object.recruiter.username }})</a>
                   <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    {% if object.recruiter != user %}
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-save' object.id %}">Save</a>
+                    {% endif %}
                 </div>
                 <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
                   <h4>Experience with: {{ post.knowledge }}</h4>
@@ -23,6 +26,7 @@
                 </div>
             {% else %}
                <div>
+
                    {# <a class = "btn btn-secondary btn-sm mt-1 mb-1" href = {% url 'post-apply' %}>Apply</a> #}
                    <form method = "post" enctype = multipart/form-data action="apply/">
                        {% csrf_token %}
