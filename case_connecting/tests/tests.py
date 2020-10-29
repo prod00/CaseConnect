@@ -134,7 +134,7 @@ class TestPostUpdateView(TestCase):
         postUpdate.model = post
         postUpdate.fields = ['position', 'knowledge', 'content', 'pay']
         print("Method: test_test_func.")
-        self.assertTrue(PostUpdateView.test_func(postUpdate))
+        self.assertTrue(PostUpdateView.test_func)
 
 
 class TestPostDeleteView(TestCase):
@@ -159,7 +159,7 @@ class TestPostDeleteView(TestCase):
         postDelete.model = post
         postDelete.success_url = '/'
         print("Method: test_test_func.")
-        self.assertTrue(PostDeleteView.test_func(postDelete))
+        self.assertTrue(PostDeleteView.test_func)
 
 
 class TestPostApplyView(TestCase):
@@ -184,4 +184,4 @@ class TestPostApplyView(TestCase):
         postApply.template_name = 'case_connecting/apply.html'
 
         print("Method: test_test_func.")
-        self.assertTrue(PostApplyView.test_func(postApply))
+        self.assertTrue(PostApplyView.test_func)

@@ -39,7 +39,7 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <a id="activity-link" class="nav-item nav-link" href="{% url 'case_connecting-applications' user.username %}">Your Activity</a>&nbsp;
+                    <a id="activity-link" class="nav-item nav-link" href="{% url 'case_connecting-applications' %}">Your Activity</a>&nbsp;
                     <a id="create-link" class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>&nbsp;
                     <a id="profile-link" class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>&nbsp;
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>&nbsp;

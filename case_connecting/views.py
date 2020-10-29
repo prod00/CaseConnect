@@ -6,6 +6,7 @@ from .models import Post, Application, Save
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.http import HttpResponse, HttpResponseNotFound
 
 from django.core.mail import send_mail
 from django.contrib import messages
@@ -101,9 +102,13 @@ class PostApplicationsListView(ListView):
     context_object_name = 'applications'
     paginate_by = 8  # the number of posts per page
 
+
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Application.objects.filter(applicant=user).order_by('-date_applied')
+        #url_user = get_object_or_404(User, username=self.kwargs.get('username'))
+        request_user = self.request.user
+        return Application.objects.filter(applicant=request_user).order_by('-date_applied')
+
+
 
 
 class PostApplicantsListView(ListView):
@@ -112,8 +117,9 @@ class PostApplicantsListView(ListView):
     paginate_by = 8
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Application.objects.filter(post__recruiter=user).order_by('-date_applied')
+        request_user = self.request.user
+        return Application.objects.filter(post__recruiter=request_user).order_by('-date_applied')
+
 
 class SaveView(LoginRequiredMixin, CreateView):
     model = Save
@@ -130,14 +136,15 @@ class SaveView(LoginRequiredMixin, CreateView):
 
 
 
+
 class SavedListView(ListView):
     model = Save
     context_object_name = 'saved_posts'
     paginate_by = 8
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Save.objects.filter(user=user).order_by('-date_saved')
+        request_user = self.request.user
+        return Save.objects.filter(user=request_user).order_by('-date_saved')
 
 
 def about(request):

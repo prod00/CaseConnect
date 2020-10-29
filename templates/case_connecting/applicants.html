@@ -10,9 +10,9 @@
 </head>
     <!-- Side navigation -->
     <div class="sidenav">
-      <a href="{% url 'case_connecting-applications' user.username %}">Applications</a>
-      <a href="{% url 'case_connecting-applicants' user.username %}">Applicants</a>
-      <a href="{% url 'case_connecting-saved' user.username %}">Saved</a>
+      <a href="{% url 'case_connecting-applications' %}">Applications</a>
+      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
+      <a href="{% url 'case_connecting-saved' %}">Saved</a>
     </div>
 
     <div class="content-section" id="posting-list" align="center">
@@ -29,11 +29,12 @@
 
         {% for application in applications %} <!-- Loops through the posts -->
         <article id="post" class="media content-section"  align="left">
+        <img class="rounded-circle article-img" src="{{ application.applicant.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2">From: {{ application.applicant.get_full_name }}</a>
+                    <h3>{{ application.applicant.get_full_name }}</h3>
                 </div>
-                <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h2>
+                <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Applied To "{{ application.post.position }}" Position</a></h2>
                   <div class="media content-section">
                     <p>{{ application.message }}</p>
                   </div>

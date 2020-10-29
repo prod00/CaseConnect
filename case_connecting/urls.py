@@ -15,9 +15,9 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name="post-delete"),
     path('post/<int:pk>/apply/', PostApplyView.as_view(), name="post-apply"),
     path('post/<int:pk>/save/', SaveView.as_view(), name="post-save"),
-    path('applications/<str:username>/', PostApplicationsListView.as_view(template_name='case_connecting/applications_page.html'), name="case_connecting-applications"),
-    path('applicants/<str:username>/', PostApplicantsListView.as_view(template_name='case_connecting/applicants.html'), name="case_connecting-applicants"),
-    path('saved/<str:username>/',
+    path('applications/', PostApplicationsListView.as_view(template_name='case_connecting/applications_page.html'), name="case_connecting-applications"),
+    path('applicants/', PostApplicantsListView.as_view(template_name='case_connecting/applicants.html'), name="case_connecting-applicants"),
+    path('saved/',
          SavedListView.as_view(template_name='case_connecting/saved.html'),
          name="case_connecting-saved"),
 

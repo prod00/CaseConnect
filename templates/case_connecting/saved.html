@@ -1,10 +1,18 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
+    <head>
+    <style>
+        a[id="activity-link"] {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+    </head>
     <!-- Side navigation -->
     <div class="sidenav">
-      <a href="{% url 'case_connecting-applications' user.username %}">Applications</a>
-      <a href="{% url 'case_connecting-applicants' user.username %}">Applicants</a>
-      <a href="{% url 'case_connecting-saved' user.username %}">Saved</a>
+      <a href="{% url 'case_connecting-applications' %}">Applications</a>
+      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
+      <a href="{% url 'case_connecting-saved' %}">Saved</a>
     </div>
 
 <head>
