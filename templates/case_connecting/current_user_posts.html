@@ -1,6 +1,6 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
-<head>
+    <head>
     <style>
         a[id="activity-link"] {
             background-color: #555;
@@ -18,31 +18,32 @@
 
     <div class="content-section" id="posting-list" align="center">
         <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Your Applicants</h1>
+            <h1 style="color: #0a304e;">Your Posts</h1>
             <br>
         </div>
 
-        {% if not applications %}
+        {% if not posts %}
             <div style="text-align: center;">
-                <h2>No Applications Have Been Received</h2>
+                <h2>No Posts Have Been Made</h2>
             </div>
         {% endif %}
 
-        {% for application in applications %} <!-- Loops through the posts -->
-        <article id="post" class="media content-section"  align="left">
-        <img class="rounded-circle article-img" src="{{ application.applicant.profile.image.url }}"> <!-- Side image -->
-              <div class="media-body">
-                <div class="article-metadata">
-                    <h3>{{ application.applicant.get_full_name }}</h3>
-                </div>
-                <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Applied To Your "{{ application.post.position }}" Position</a></h2>
-                  <div class="media content-section">
-                    <p>{{ application.message }}</p>
-                  </div>
-              </div>
-            </article>
-        {% endfor %}
+    <div class="content-section" id="posting-list" align="center">
 
+        {% for post in posts %} <!-- Loops through the posts -->
+            <article id="post" class="media content-section" align="left">
+            <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
+                  <div class="media-body">
+                    <div class="article-metadata">
+                      <a class="mr-2">{{ post.recruiter.get_full_name }}</a>
+                      <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
+                      <h4>Experience with: {{ post.knowledge }}</h4>
+                      <p class="article-content">Pay: {{ post.pay }}</p>
+                  </div>
+                </article>
+        {% endfor %}
         {% if is_paginated %}
             {% if page_obj.has_previous %}
                 {% if page_obj.previous_page_number == 1 %}
@@ -64,6 +65,4 @@
 
         {% endif %}
     </div>
-
-
 {% endblock %}

@@ -13,6 +13,7 @@
       <a href="{% url 'case_connecting-applications' %}">Applications</a>
       <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
       <a href="{% url 'case_connecting-saved' %}">Saved</a>
+      <a href="{% url 'case_connecting-posts' %}">Your Posts</a>
     </div>
 
 <head>
@@ -47,6 +48,8 @@
                   <h4>Experience with: {{ saved_post.post.knowledge }}</h4>
                   <p class="article-content">Pay: {{ saved_post.post.pay }}</p>
               </div>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-unsave' saved_post.id %}">Remove</a>
+
             </article>
         {% endfor %}
 

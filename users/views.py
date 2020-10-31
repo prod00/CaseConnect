@@ -40,7 +40,7 @@ def profile(request):
         'u_form': u_form,
         'p_form': p_form,
         # either make usernames unique or change this to email and make email required
-        'posts': Post.objects.filter(recruiter__username=username)
+
     }
 
     return render(request, 'users/profile.html', context)

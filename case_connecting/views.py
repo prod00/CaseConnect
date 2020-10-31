@@ -6,6 +6,7 @@ from .models import Post, Application, Save
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpResponseNotFound
 
 from django.core.mail import send_mail
@@ -90,11 +91,22 @@ class PostApplyView(LoginRequiredMixin, CreateView):
     template_name = 'case_connecting/apply.html'
     fields = ['message']
 
+    # def test_func(self):
+    #     application = self.get_object()
+    #     if self.request.user != application.post.recruiter:
+    #         print("true")
+    #         return True
+    #     else:
+    #         print("false")
+    #         return False
+
     def form_valid(self, form):
         form.instance.applicant = self.request.user
         post_id = get_object_or_404(Post, pk=self.kwargs.get('pk'))
         form.instance.post = Post.objects.get(pk=post_id.id)
+        messages.success(self.request, "Successfully Applied '" + str(form.instance.post.position) + "' To Saved Posts")
         return super().form_valid(form)
+
 
 
 class PostApplicationsListView(ListView):
@@ -107,7 +119,6 @@ class PostApplicationsListView(ListView):
         #url_user = get_object_or_404(User, username=self.kwargs.get('username'))
         request_user = self.request.user
         return Application.objects.filter(applicant=request_user).order_by('-date_applied')
-
 
 
 
@@ -131,13 +142,11 @@ class SaveView(LoginRequiredMixin, CreateView):
         post_id = get_object_or_404(Post, pk=self.kwargs.get('pk'))
         form.instance.post = Post.objects.get(pk=post_id.id)
         super().form_valid(form)
+        messages.success(self.request, "Successfully Saved '" + str(form.instance.post.position) + "' To Saved Posts")
         return redirect('/post/'+str(post_id.id))
 
 
-
-
-
-class SavedListView(ListView):
+class SavedListView(LoginRequiredMixin, ListView):
     model = Save
     context_object_name = 'saved_posts'
     paginate_by = 8
@@ -145,6 +154,31 @@ class SavedListView(ListView):
     def get_queryset(self):
         request_user = self.request.user
         return Save.objects.filter(user=request_user).order_by('-date_saved')
+
+
+class SaveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Save
+    success_url = '/saved/'  # sends user back to the Saved page once the post has been deleted
+
+    def test_func(self):
+        saved_post = self.get_object()
+        if self.request.user == saved_post.user:
+            print("true")
+            return True
+        else:
+            print("false")
+            return False
+
+class CurrentUserPostListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'case_connecting/current_user_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 8  # the number of posts per page
+
+    def get_queryset(self):
+        user = self.request.user
+        return Post.objects.filter(recruiter=user).order_by('-date_posted')
+
 
 
 def about(request):

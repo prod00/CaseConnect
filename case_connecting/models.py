@@ -36,7 +36,7 @@ class Application(models.Model):
         return template.format(self)
 
     def get_absolute_url(self):
-        return reverse('case_connecting-home')
+        return reverse('case_connecting-applications')
 
 
 class Save(models.Model):
