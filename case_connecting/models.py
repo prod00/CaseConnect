@@ -39,6 +39,7 @@ class Application(models.Model):
         return reverse('case_connecting-applications')
 
 
+
 class Save(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

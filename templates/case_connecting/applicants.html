@@ -33,12 +33,29 @@
         <img class="rounded-circle article-img" src="{{ application.applicant.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
+
                     <h3>{{ application.applicant.get_full_name }}</h3>
                 </div>
                 <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Applied To Your "{{ application.post.position }}" Position</a></h2>
                   <div class="media content-section">
-                    <p>{{ application.message }}</p>
+                      <p>
+                          {{ application.message }} <br><br>
+                          Respond to {{ application.applicant.first_name }} by emailing {{ application.applicant.email }}
+                      </p>
                   </div>
+
+              {% if application.applicant.profile.resume %}
+                  <h3><a class="article-title" href="{{ application.applicant.profile.resume.url}}">View Resume</a></h3>
+              {% endif %}
+
+              {% if not application.applicant.profile.resume %}
+                  <h3>No Resume Available</h3>
+              {% endif %}
+
+
+
+
+
               </div>
             </article>
         {% endfor %}

@@ -17,7 +17,12 @@
             Application
         </legend>
         {{ form|crispy }}
+        {% if user.profile.resume.url %}
+        <a class="article-title" href="{{ user.profile.resume.url}}">Your Resume Will Be Automatically Submitted</a>
+        {% endif %}
     </fieldset>
+
+
     <div class="form-group">
         <button class="btn btn-outline-info" type="submit">
             Submit

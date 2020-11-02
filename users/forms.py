@@ -31,5 +31,10 @@ class ProfileUPdateForm(forms.ModelForm):
         model = Profile
         fields = ['image']
 
+class ResumeUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['resume']
+
 
 
