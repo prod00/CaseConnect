@@ -2,7 +2,7 @@
 {% block content %}
 
 
-    <div class="content-section" id="posting-list">
+    <div class="content-section" id="posting-list" align="center">
         <div style="text-align: center;">
             <h1 style="color: #0a304e;">Filtered Jobs</h1>
         </div>
@@ -10,7 +10,7 @@
 
 
         {% for post in posts %} <!-- Loops through the posts -->
-        <article class="media content-section" id="post">
+        <article class="media content-section" id="post" align="left">
         <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
