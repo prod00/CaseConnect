@@ -121,6 +121,20 @@ class PostApplicationsListView(ListView):
         return Application.objects.filter(applicant=request_user).order_by('-date_applied')
 
 
+class PostApplicationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Application
+    success_url = '/applications/'  # sends user back to the Saved page once the post has been deleted
+
+    def test_func(self):
+        application = self.get_object()
+        if self.request.user == application.applicant:
+            print("true")
+            return True
+        else:
+            print("false")
+            return False
+
+
 
 class PostApplicantsListView(ListView):
     model = Application
