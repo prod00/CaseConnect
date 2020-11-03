@@ -8,14 +8,14 @@
             Remove Application
         </legend>
         <h2>
-            Are you sure you want to remove the application to {{ object.post.recruiter.get_full_name }} for: "{{ object.post.position }}"?
+            Are you sure you want to remove {{ object.applicant.get_full_name }}'s application for: "{{ object.post.position }}"?
         </h2>
     </fieldset>
     <div class="form-group">
         <button class="btn btn-outline-danger" type="submit">
             Yes, Remove
         </button>
-        <a class="btn btn-outline-secondary" href="{% url 'case_connecting-applications' %}">
+        <a class="btn btn-outline-secondary" href="{% url 'case_connecting-applicants' %}">
             Cancel
         </a>
     </div>

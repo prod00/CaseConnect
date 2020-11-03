@@ -2,7 +2,8 @@ from django.urls import path
 from .views import PostListView, PostDetailView, PostCreateView,\
     PostUpdateView, PostDeleteView, UserPostListView, search,\
     PostApplyView, PostApplicationsListView, PostApplicantsListView,\
-    SaveView, SavedListView, SaveDeleteView, CurrentUserPostListView, PostApplicationDeleteView
+    SaveView, SavedListView, SaveDeleteView, CurrentUserPostListView,\
+    PostApplicationDeleteView, PostApplicantDeleteView
 
 from . import views
 
@@ -19,6 +20,7 @@ urlpatterns = [
     path('post/<int:pk>/save/', SaveView.as_view(), name="post-save"),
     path('applications/', PostApplicationsListView.as_view(template_name='case_connecting/applications_page.html'), name="case_connecting-applications"),
     path('post/<int:pk>/delete-application/', PostApplicationDeleteView.as_view(), name="post-delete-application"),
+    path('post/<int:pk>/delete-applicant/', PostApplicantDeleteView.as_view(template_name='case_connecting/applicant_confirm_delete.html'), name="post-delete-applicant"),
     path('applicants/', PostApplicantsListView.as_view(template_name='case_connecting/applicants.html'), name="case_connecting-applicants"),
     path('saved/',
          SavedListView.as_view(template_name='case_connecting/saved.html'),

@@ -123,15 +123,25 @@ class PostApplicationsListView(ListView):
 
 class PostApplicationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Application
-    success_url = '/applications/'  # sends user back to the Saved page once the post has been deleted
+    success_url = '/applications'
 
     def test_func(self):
         application = self.get_object()
         if self.request.user == application.applicant:
-            print("true")
             return True
         else:
-            print("false")
+            return False
+
+class PostApplicantDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Application
+    success_url = '/applicants'
+
+
+    def test_func(self):
+        application = self.get_object()
+        if self.request.user == application.post.recruiter:
+            return True
+        else:
             return False
 
 
