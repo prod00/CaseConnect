@@ -47,8 +47,9 @@
                 <h2><a class="article-title" href="{% url 'post-detail' saved_post.post.id %}">{{ saved_post.post.position }}</a></h2>
                   <h4>Experience with: {{ saved_post.post.knowledge }}</h4>
                   <p class="article-content">Pay: {{ saved_post.post.pay }}</p>
+                  <a class="btn btn-danger btn-sm mt-1 mb-1 float-right" href="{% url 'post-unsave' saved_post.id %}">Remove</a>
               </div>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-unsave' saved_post.id %}">Remove</a>
+
 
             </article>
         {% endfor %}
