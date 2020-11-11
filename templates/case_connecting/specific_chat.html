@@ -1,0 +1,72 @@
+{% extends "case_connecting/base.html" %}
+{% block content %}
+<head>
+    <style>
+        a[id="activity-link"] {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+    <!-- Side navigation -->
+    <div class="sidenav">
+      <a href="{% url 'case_connecting-applications' %}">Applications</a>
+      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
+      <a href="{% url 'case_connecting-saved' %}">Saved</a>
+      <a href="{% url 'case_connecting-posts' %}">Your Posts</a>
+    <a href="{% url 'case_connecting-chats' %}">Messages</a>
+    </div>
+
+    <div class="content-section" id="posting-list" align="center">
+        <div style="text-align: center;">
+            <h1 style="color: #0a304e;">Job: {{ chats.0.app.post.position }}</h1>
+            <br>
+        </div>
+
+        {% if not chats %}
+            <div style="text-align: center;">
+                <h2>No Messages Have Been Received</h2>
+            </div>
+        {% endif %}
+
+        {% for chat in chats %} <!-- Loops through the posts -->
+        <article id="post" class="media content-section" align="left">
+        <img class="rounded-circle article-img" src="{{ chat.sender.profile.image.url }}"> <!-- Side image -->
+            <p>
+                {{ chat.sender.get_full_name }} <br>
+                {{ chat.message }}
+
+            </p>
+            </article>
+        {% endfor %}
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-chat-applicant' chats.0.app.id %}">Send Message</a>
+
+
+
+
+
+
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                {% if page_obj.previous_page_number == 1 %}
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href = "?page=1">First Page</a>
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+                {% endif %}
+            {% endif %}
+            {% if page_obj.has_next %}
+                {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.paginator.num_pages }}">Last Page</a>
+                {% endif %}
+
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+
+{% endblock %}

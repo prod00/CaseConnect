@@ -15,6 +15,7 @@
       <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
       <a href="{% url 'case_connecting-saved' %}">Saved</a>
       <a href="{% url 'case_connecting-posts' %}">Your Posts</a>
+    <a href="{% url 'case_connecting-chats' %}">Messages</a>
     </div>
 
     <div class="content-section" id="posting-list" align="center">
@@ -35,9 +36,9 @@
         <article id="post" class="media content-section" align="left">
               <div class="media-body">
                 <div class="article-metadata">
-                  <a class="mr-2" href="{% url 'user-posts' application.post.recruiter %}">To: {{ application.post.recruiter.get_full_name }}</a>
+                  <h4><a class="article-title" href="{% url 'user-posts' application.post.recruiter %}">To: {{ application.post.recruiter.get_full_name }}</a></h4>
                 </div>
-                <h2><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h2>
+                <h3><a class="article-title" href="{% url 'post-detail' application.post.id %}">Position: {{ application.post.position }}</a></h3>
                   <div class="media content-section">
                     <p>{{ application.message }}</p>
                   </div>

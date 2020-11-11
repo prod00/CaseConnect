@@ -1,15 +1,13 @@
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, \
     CreateView, UpdateView, DeleteView
-from .models import Post, Application, Save
+from .models import Post, Application, Save, Chat
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.urls import reverse_lazy
-from django.http import HttpResponse, HttpResponseNotFound
-
-from django.core.mail import send_mail
+# from django.urls import reverse_lazy
+# from django.http import HttpResponse, HttpResponseNotFound
+# from django.core.mail import send_mail
 from django.contrib import messages
 
 
@@ -91,22 +89,13 @@ class PostApplyView(LoginRequiredMixin, CreateView):
     template_name = 'case_connecting/apply.html'
     fields = ['message']
 
-    # def test_func(self):
-    #     application = self.get_object()
-    #     if self.request.user != application.post.recruiter:
-    #         print("true")
-    #         return True
-    #     else:
-    #         print("false")
-    #         return False
-
     def form_valid(self, form):
         form.instance.applicant = self.request.user
         post_id = get_object_or_404(Post, pk=self.kwargs.get('pk'))
         form.instance.post = Post.objects.get(pk=post_id.id)
-        messages.success(self.request, "Successfully Applied '" + str(form.instance.post.position) + "' To Saved Posts")
+        messages.success(self.request,
+                         "Successfully Applied '" + str(form.instance.post.position) + "' To Applications")
         return super().form_valid(form)
-
 
 
 class PostApplicationsListView(ListView):
@@ -114,9 +103,8 @@ class PostApplicationsListView(ListView):
     context_object_name = 'applications'
     paginate_by = 8  # the number of posts per page
 
-
     def get_queryset(self):
-        #url_user = get_object_or_404(User, username=self.kwargs.get('username'))
+        # url_user = get_object_or_404(User, username=self.kwargs.get('username'))
         request_user = self.request.user
         return Application.objects.filter(applicant=request_user).order_by('-date_applied')
 
@@ -132,10 +120,10 @@ class PostApplicationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteV
         else:
             return False
 
+
 class PostApplicantDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Application
     success_url = '/applicants'
-
 
     def test_func(self):
         application = self.get_object()
@@ -143,7 +131,6 @@ class PostApplicantDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteVie
             return True
         else:
             return False
-
 
 
 class PostApplicantsListView(ListView):
@@ -163,11 +150,11 @@ class SaveView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        post_id = get_object_or_404(Post, pk=self.kwargs.get('pk'))
-        form.instance.post = Post.objects.get(pk=post_id.id)
+        post = get_object_or_404(Post, pk=self.kwargs.get('pk'))
+        form.instance.post = Post.objects.get(pk=post.id)
         super().form_valid(form)
         messages.success(self.request, "Successfully Saved '" + str(form.instance.post.position) + "' To Saved Posts")
-        return redirect('/post/'+str(post_id.id))
+        return redirect('/post/' + str(post.id))
 
 
 class SavedListView(LoginRequiredMixin, ListView):
@@ -187,11 +174,10 @@ class SaveDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         saved_post = self.get_object()
         if self.request.user == saved_post.user:
-            print("true")
             return True
         else:
-            print("false")
             return False
+
 
 class CurrentUserPostListView(LoginRequiredMixin, ListView):
     model = Post
@@ -203,6 +189,71 @@ class CurrentUserPostListView(LoginRequiredMixin, ListView):
         user = self.request.user
         return Post.objects.filter(recruiter=user).order_by('-date_posted')
 
+
+class ChatView(LoginRequiredMixin, CreateView):
+    model = Chat
+    template_name = 'case_connecting/chat.html'
+    fields = ['message']
+
+    def form_valid(self, form):
+        form.instance.sender = self.request.user
+        application = get_object_or_404(Application, pk=self.kwargs.get('pk'))
+        form.instance.app = Application.objects.get(pk=application.id)
+        messages.success(self.request, "Successfully Sent Message")
+        return super().form_valid(form)
+
+
+class ChatListView(LoginRequiredMixin, ListView):
+    model = Chat
+    context_object_name = 'chats'
+    paginate_by = 10
+
+    def get_queryset(self):
+        request_user = self.request.user
+        chats = Chat.objects.filter(Q(app__applicant=request_user) |
+                                    Q(app__post__recruiter=request_user)).order_by('-date_sent')
+        recruiters = []
+        applicants = []
+        chatID = []
+
+        for chat in chats:
+            recruiter = chat.app.post.recruiter
+            applicant = chat.app.applicant
+            if recruiter not in recruiters and recruiter != request_user:
+                recruiters.append(recruiter)
+                chatID.append(chat.id)
+            if applicant not in applicants and applicant != request_user:
+                applicants.append(applicant)
+                chatID.append(chat.id)
+
+        filteredChats = []
+        for i in chatID:
+            chat = Chat.objects.get(id=i)
+            filteredChats.append(chat)
+
+
+
+
+
+
+        return filteredChats
+
+
+
+class SpecificChatListView(LoginRequiredMixin, ListView):
+    model = Chat
+    context_object_name = 'chats'
+    paginate_by = 10
+
+    def get_queryset(self):
+        request_user = self.request.user
+        chat_obj = get_object_or_404(Chat, pk=self.kwargs.get('pk'))
+        applicant = chat_obj.app.applicant
+        recruiter = chat_obj.app.post.recruiter
+
+        return Chat.objects.filter(Q(app__applicant=request_user, app__post__recruiter=recruiter) |
+                                   Q(app__post__recruiter=request_user, app__applicant=applicant)).order_by(
+            '-date_sent')
 
 
 def about(request):
@@ -226,5 +277,3 @@ def search(request):
         'posts': posts
     }
     return render(request, template, context)
-
-

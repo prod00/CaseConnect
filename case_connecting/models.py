@@ -52,5 +52,18 @@ class Save(models.Model):
     def get_absolute_url(self):
         return reverse('case_connecting-home')
 
+class Chat(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    app = models.ForeignKey(Application, on_delete=models.CASCADE, default=None)
+    date_sent = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        template = 'Sender: {0.sender}, Application: [{0.app}], Date Sent: {0.date_sent}'
+        return template.format(self)
+
+    def get_absolute_url(self):
+        return reverse('case_connecting-chats')
+
 
 

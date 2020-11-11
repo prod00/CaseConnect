@@ -3,7 +3,7 @@ from .views import PostListView, PostDetailView, PostCreateView,\
     PostUpdateView, PostDeleteView, UserPostListView, search,\
     PostApplyView, PostApplicationsListView, PostApplicantsListView,\
     SaveView, SavedListView, SaveDeleteView, CurrentUserPostListView,\
-    PostApplicationDeleteView, PostApplicantDeleteView
+    PostApplicationDeleteView, PostApplicantDeleteView, ChatView, ChatListView, SpecificChatListView
 
 from . import views
 
@@ -21,11 +21,20 @@ urlpatterns = [
     path('applications/', PostApplicationsListView.as_view(template_name='case_connecting/applications_page.html'), name="case_connecting-applications"),
     path('post/<int:pk>/delete-application/', PostApplicationDeleteView.as_view(), name="post-delete-application"),
     path('post/<int:pk>/delete-applicant/', PostApplicantDeleteView.as_view(template_name='case_connecting/applicant_confirm_delete.html'), name="post-delete-applicant"),
+    path('post/<int:pk>/chat-application/',
+         ChatView.as_view(),
+         name="post-chat-applicant"),
     path('applicants/', PostApplicantsListView.as_view(template_name='case_connecting/applicants.html'), name="case_connecting-applicants"),
     path('saved/',
          SavedListView.as_view(template_name='case_connecting/saved.html'),
          name="case_connecting-saved"),
     path('post-list', CurrentUserPostListView.as_view(), name="case_connecting-posts"),
+    path('chats/',
+         ChatListView.as_view(template_name='case_connecting/chat_list_view.html'),
+         name="case_connecting-chats"),
+    path('chat/<int:pk>/',
+         SpecificChatListView.as_view(template_name='case_connecting/specific_chat.html'),
+         name="case_connecting-chat"),
     path('about/', views.about, name="case_connecting-about"),
 
 
