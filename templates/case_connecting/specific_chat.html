@@ -13,13 +13,13 @@
       <a href="{% url 'case_connecting-applications' %}">Applications</a>
       <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
       <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Your Posts</a>
+      <a href="{% url 'case_connecting-posts' %}">Posts</a>
     <a href="{% url 'case_connecting-chats' %}">Messages</a>
     </div>
 
     <div class="content-section" id="posting-list" align="center">
         <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Job: {{ chats.0.app.post.position }}</h1>
+            <h1 style="color: #0a304e;">Position: {{ chats.0.app.post.position }}</h1>
             <br>
         </div>
 
@@ -29,17 +29,44 @@
             </div>
         {% endif %}
 
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'case_connecting-chats' %}">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-chat-applicant' chats.0.app.id %}">Send New Message</a>
+
+
+
+
         {% for chat in chats %} <!-- Loops through the posts -->
         <article id="post" class="media content-section" align="left">
-        <img class="rounded-circle article-img" src="{{ chat.sender.profile.image.url }}"> <!-- Side image -->
-            <p>
-                {{ chat.sender.get_full_name }} <br>
-                {{ chat.message }}
+        <img class="rounded-circle article-img" src="{{ chat.sender.profile.image.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    {{ chat.sender.get_full_name }}
+                    {{ chat.date_sent|date:"m/d/y" }}
+                </div>
 
-            </p>
+                <p>
+                    {{ chat.message }}
+                </p>
+            </div>
+
             </article>
         {% endfor %}
-        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-chat-applicant' chats.0.app.id %}">Send Message</a>
+
+        <article id="post" class="media content-section" align="left">
+        <img class="rounded-circle article-img" src="{{ chats.0.app.applicant.profile.image.url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    {{ chats.0.app.applicant.get_full_name }}
+                    {{ chats.0.app.date_applied|date:"m/d/y" }} (Original Application)
+                </div>
+
+                <p>
+                    {{ chats.0.app.message }}
+                </p>
+            </div>
+
+        </article>
+
 
 
 

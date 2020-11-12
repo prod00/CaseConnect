@@ -13,7 +13,7 @@
       <a href="{% url 'case_connecting-applications' %}">Applications</a>
       <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
       <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Your Posts</a>
+      <a href="{% url 'case_connecting-posts' %}">Posts</a>
         <a href="{% url 'case_connecting-chats' %}">Messages</a>
     </div>
 
@@ -41,7 +41,7 @@
                   <div class="media content-section">
                       <p>
                           {{ application.message }} <br><br>
-                          Respond to {{ application.applicant.first_name }} by emailing {{ application.applicant.email }}
+                          {{ application.applicant.email }}
                       </p>
                   </div>
 

@@ -13,7 +13,7 @@
       <a href="{% url 'case_connecting-applications' %}">Applications</a>
       <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
       <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Your Posts</a>
+      <a href="{% url 'case_connecting-posts' %}">Posts</a>
     <a href="{% url 'case_connecting-chats' %}">Messages</a>
     </div>
 
@@ -48,8 +48,6 @@
                         </article>
                     {% endif %}
                 {% endfor %}
-
-
                 {% for chat in chats %} <!-- Loops through the posts -->
                     {% if not user == chat.app.applicant %}
                         <article id="post" class="media content-section"  align="left">

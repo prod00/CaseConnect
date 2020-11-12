@@ -200,7 +200,11 @@ class ChatView(LoginRequiredMixin, CreateView):
         application = get_object_or_404(Application, pk=self.kwargs.get('pk'))
         form.instance.app = Application.objects.get(pk=application.id)
         messages.success(self.request, "Successfully Sent Message")
-        return super().form_valid(form)
+        super().form_valid(form)
+        newChat = Chat.objects.filter(app__id=application.id)
+        first = newChat.first()
+
+        return redirect('/chat/'+str(first.id))
 
 
 class ChatListView(LoginRequiredMixin, ListView):
