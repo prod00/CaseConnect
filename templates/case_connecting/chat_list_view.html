@@ -31,7 +31,7 @@
 
         {% if user.is_authenticated %}
 
-                {% for chat in chats %} <!-- Loops through the posts -->
+                {% for chat in chats %}
                     {% if not user == chat.app.post.recruiter %}
 
                         <article id="post" class="media content-section"  align="left">
@@ -48,7 +48,7 @@
                         </article>
                     {% endif %}
                 {% endfor %}
-                {% for chat in chats %} <!-- Loops through the posts -->
+                {% for chat in chats %}
                     {% if not user == chat.app.applicant %}
                         <article id="post" class="media content-section"  align="left">
                           <div class="media-body">

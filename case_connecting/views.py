@@ -94,7 +94,7 @@ class PostApplyView(LoginRequiredMixin, CreateView):
         post_id = get_object_or_404(Post, pk=self.kwargs.get('pk'))
         form.instance.post = Post.objects.get(pk=post_id.id)
         messages.success(self.request,
-                         "Successfully Applied '" + str(form.instance.post.position) + "' To Applications")
+                         "Successfully Applied To '" + str(form.instance.post.position) + "'")
         return super().form_valid(form)
 
 
@@ -204,7 +204,7 @@ class ChatView(LoginRequiredMixin, CreateView):
         newChat = Chat.objects.filter(app__id=application.id)
         first = newChat.first()
 
-        return redirect('/chat/'+str(first.id))
+        return redirect('/chat/' + str(first.id))
 
 
 class ChatListView(LoginRequiredMixin, ListView):
@@ -216,48 +216,46 @@ class ChatListView(LoginRequiredMixin, ListView):
         request_user = self.request.user
         chats = Chat.objects.filter(Q(app__applicant=request_user) |
                                     Q(app__post__recruiter=request_user)).order_by('-date_sent')
-        recruiters = []
-        applicants = []
-        chatID = []
+
+        # recruiters = []
+        combos = []
+        chat_ids = []
 
         for chat in chats:
-            recruiter = chat.app.post.recruiter
+            # To make the chat stream unique I am combining the applicant user id and the post id to get the combo
+            # and then testing whether that combo has been seen before.
+
             applicant = chat.app.applicant
-            if recruiter not in recruiters and recruiter != request_user:
-                recruiters.append(recruiter)
-                chatID.append(chat.id)
-            if applicant not in applicants and applicant != request_user:
-                applicants.append(applicant)
-                chatID.append(chat.id)
+            post_id = chat.app.post.id
+            combo = str(applicant)+str(post_id)
+            if combo not in combos:
+                combos.append(combo)
+                chat_ids.append(chat.id)
+
 
         filteredChats = []
-        for i in chatID:
-            chat = Chat.objects.get(id=i)
+        for chat_id in chat_ids:
+            chat = Chat.objects.get(id=chat_id)
             filteredChats.append(chat)
 
-
-
-
-
-
         return filteredChats
-
 
 
 class SpecificChatListView(LoginRequiredMixin, ListView):
     model = Chat
     context_object_name = 'chats'
-    paginate_by = 10
 
     def get_queryset(self):
         request_user = self.request.user
         chat_obj = get_object_or_404(Chat, pk=self.kwargs.get('pk'))
+        post_obj = get_object_or_404(Post, pk=chat_obj.app.post.id)
         applicant = chat_obj.app.applicant
         recruiter = chat_obj.app.post.recruiter
 
-        return Chat.objects.filter(Q(app__applicant=request_user, app__post__recruiter=recruiter) |
-                                   Q(app__post__recruiter=request_user, app__applicant=applicant)).order_by(
+        return Chat.objects.filter(Q(app__applicant=request_user, app__post__recruiter=recruiter, app__post_id=post_obj.id) |
+                                   Q(app__post__recruiter=request_user, app__applicant=applicant, app__post_id=post_obj.id)).order_by(
             '-date_sent')
+
 
 
 def about(request):
