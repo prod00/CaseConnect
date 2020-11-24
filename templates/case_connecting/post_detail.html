@@ -18,7 +18,7 @@
             </article>
             {% if object.recruiter == user %}
                 <div>
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Edit</a>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1 button" href="{% url 'post-update' object.id %}">Edit</a>
                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
                 </div>
             {% else %}
@@ -27,12 +27,12 @@
                    {# <a class = "btn btn-secondary btn-sm mt-1 mb-1" href ="{% url 'post-apply' %}">Apply</a> #}
                    <form method = "post" enctype = multipart/form-data action="apply/">
                        {% csrf_token %}
-                       <button class = "btn btn-secondary btn-sm mt-1 mb-1" type = "submit" name = "Apply" href ="{% url 'post-apply' object.id %}">
+                       <a class = "btn btn-secondary mt-1 mb-1 button" type = "submit" name = "Apply" href ="{% url 'post-apply' object.id %}">
                            Apply
-                       </button>
+                       </a>
                    </form>
 
-                   <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-save' object.id %}">Save</a>
+                   <a class="btn btn-danger btn-sm mt-1 mb-1 button" href="{% url 'post-save' object.id %}">Save</a>
 
                </div>
            {% endif %}

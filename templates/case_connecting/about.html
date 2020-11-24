@@ -1,16 +1,12 @@
 {% extends "case_connecting/base.html" %}
+{% load static %}
 {% block content %}
 <head>
-    <style>
-        a[id="about-link"] {
-            background-color: #555;
-            color: white;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/about.css' %}">
 </head>
-<h1 style="color: #0a304e;">Case Connect</h1>
-<p style="color: #0a304e;">
+<h1>Case Connect</h1>
+<p>
+    <br><br>
     Case Connect was created in Fall 2020 as a means to streamline the connection process between Case Western Reserve University students and professionals and open up more opportunities for both ends. Using Case Connect, students can apply to on-campus jobs and assistant positions posted by researchers, professors, and student entrepreneurs.
     <br><br>
     After registering using the tab to the right, users can create posts containing position titles, preferred knowledge of applicants, job descriptions, and job pay if applicable.

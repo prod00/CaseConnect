@@ -1,31 +1,19 @@
 {% extends "case_connecting/base.html" %}
+{% load static %}
 {% block content %}
 <head>
-    <style>
-        a[id="activity-link"] {
-            background-color: #555;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/activity.css' %}">
 </head>
-    <!-- Side navigation -->
-    <div class="sidenav">
-      <a href="{% url 'case_connecting-applications' %}">Applications</a>
-      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
-      <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Posts</a>
-    <a href="{% url 'case_connecting-chats' %}">Messages</a>
-    </div>
 
-    <div class="content-section" id="posting-list" align="center">
-        <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Your Messages</h1>
+    <div class="content-section" id="posting-list">
+        <div>
+            <h1>Your Messages</h1>
             <br>
         </div>
 
         {% if not chats %}
-            <div style="text-align: center;">
-                <h2>No Messages Have Been Received</h2>
+            <div>
+                <h2 class="none-to-show">No Messages Have Been Received</h2>
             </div>
         {% endif %}
 
@@ -34,7 +22,7 @@
                 {% for chat in chats %}
                     {% if not user == chat.app.post.recruiter %}
 
-                        <article id="post" class="media content-section"  align="left">
+                        <article id="post" class="media content-section">
                           <div class="media-body">
 
                               <div class="article-metadata">
@@ -50,7 +38,7 @@
                 {% endfor %}
                 {% for chat in chats %}
                     {% if not user == chat.app.applicant %}
-                        <article id="post" class="media content-section"  align="left">
+                        <article id="post" class="media content-section">
                           <div class="media-body">
 
                               <div class="article-metadata">

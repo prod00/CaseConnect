@@ -1,12 +1,12 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
-    <h2 style="color:#9b9da3;">
+<h2>
     You have been successfully logged out.
-    </h2>
+</h2>
 <div class="border-top pt-3">
     <small class="text-muted">
-        <h5><a href="{% url 'login' %}" style="color: #0a304e;">Log In</a></h5>
-        <h5><a href="{% url 'register' %}" style="color: #0a304e;">Sign Up</a></h5>
+        <h5><a class="text" href="{% url 'login' %}">Log In</a></h5>
+        <h5><a class="text" href="{% url 'register' %}">Sign Up</a></h5>
     </small>
 </div>
 {% endblock %}

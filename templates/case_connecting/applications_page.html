@@ -1,39 +1,26 @@
 {% extends "case_connecting/base.html" %}
+{% load static %}
 {% block content %}
 <head>
-    <style>
-        a[id="activity-link"] {
-            background-color: #555;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/activity.css' %}">
 </head>
 
-    <!-- Side navigation -->
-    <div class="sidenav">
-      <a href="{% url 'case_connecting-applications' %}">Applications</a>
-      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
-      <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Posts</a>
-    <a href="{% url 'case_connecting-chats' %}">Messages</a>
-    </div>
-
-    <div class="content-section" id="posting-list" align="center">
-        <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Your Applications</h1>
+    <div class="content-section" id="posting-list">
+        <div>
+            <h1>Your Applications</h1>
             <br>
         </div>
 
         {% if not applications %}
-            <div style="text-align: center;">
-                <h2>No Applications Have Been Sent</h2>
+            <div>
+                <h2 class="none-to-show">No Applications Have Been Sent</h2>
             </div>
         {% endif %}
 
 
 
         {% for application in applications %} <!-- Loops through the posts -->
-        <article id="post" class="media content-section" align="left">
+        <article id="post" class="media content-section">
               <div class="media-body">
                 <div class="article-metadata">
                   <h4><a class="article-title" href="{% url 'user-posts' application.post.recruiter %}">To: {{ application.post.recruiter.get_full_name }}</a></h4>
@@ -42,9 +29,7 @@
                   <div class="media content-section">
                     <p>{{ application.message }}</p>
                   </div>
-                  <div align="right">
-                      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete-application' application.id %}">Delete</a>
-                  </div>
+                  <a class="btn btn-danger mt-1 mb-1 btn-sm" href="{% url 'post-delete-application' application.id %}">Delete</a>
               </div>
             </article>
         {% endfor %}

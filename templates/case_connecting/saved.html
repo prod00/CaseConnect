@@ -1,44 +1,24 @@
 {% extends "case_connecting/base.html" %}
+{% load static %}
 {% block content %}
-    <head>
-    <style>
-        a[id="activity-link"] {
-            background-color: #555;
-            color: white;
-        }
-    </style>
-    </head>
-    <!-- Side navigation -->
-    <div class="sidenav">
-      <a href="{% url 'case_connecting-applications' %}">Applications</a>
-      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
-      <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Posts</a>
-    <a href="{% url 'case_connecting-chats' %}">Messages</a>
-    </div>
-
 <head>
-    <style>
-        a[id="applicants-link"] {
-            background-color: #555;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/activity.css' %}">
 </head>
-    <div class="content-section" id="posting-list" align="center">
-        <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Your Saved Posts</h1>
+
+    <div class="content-section" id="posting-list">
+        <div>
+            <h1>Your Saved Posts</h1>
             <br>
         </div>
 
         {% if not saved_posts %}
-            <div style="text-align: center;">
-                <h2>No Posts Are Saved</h2>
+            <div>
+                <h2 class="none-to-show">No Posts Are Saved</h2>
             </div>
         {% endif %}
 
         {% for saved_post in saved_posts %} <!-- Loops through the posts -->
-        <article class="media content-section" id="post" align="left">
+        <article class="media content-section" id="post">
         <img class="rounded-circle article-img" src="{{ saved_post.post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
@@ -48,9 +28,7 @@
                 <h2><a class="article-title" href="{% url 'post-detail' saved_post.post.id %}">{{ saved_post.post.position }}</a></h2>
                   <h4>Experience with: {{ saved_post.post.knowledge }}</h4>
                   <p class="article-content">Pay: {{ saved_post.post.pay }}</p>
-                  <div align="right">
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-unsave' saved_post.id %}">Delete</a>
-                  </div>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1 btn-sm" href="{% url 'post-unsave' saved_post.id %}">Delete</a>
               </div>
 
             </article>

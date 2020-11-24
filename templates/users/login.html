@@ -1,15 +1,11 @@
 {% extends "case_connecting/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 <head>
-    <style>
-        a[id="login-link"] {
-            background-color: #555;
-            color: white;
-        }
-    </style>
+ <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/login.css' %}">
 </head>
-<div class="content-section" style="background-color: #ccc; border: none;">
+<div class="content-section back">
 <form method="post">
     {% csrf_token %}
     <fieldset class="form-group">
@@ -26,7 +22,7 @@
 </form>
 <div class="border-top pt-3">
     <small class="text-muted">
-        Need An Account? <a class="ml-2" href="{% url 'register' %}" style="color: #0a304e;">Sign Up</a>
+        Need An Account? <a class="ml-2 text" href="{% url 'register' %}">Sign Up</a>
     </small>
 </div>
 </div>
