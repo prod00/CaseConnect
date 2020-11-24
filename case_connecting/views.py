@@ -217,7 +217,6 @@ class ChatListView(LoginRequiredMixin, ListView):
         chats = Chat.objects.filter(Q(app__applicant=request_user) |
                                     Q(app__post__recruiter=request_user)).order_by('-date_sent')
 
-        # recruiters = []
         combos = []
         chat_ids = []
 
