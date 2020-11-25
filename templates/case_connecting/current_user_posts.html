@@ -17,6 +17,10 @@
             </div>
         {% endif %}
 
+    <div align="center">
+        <a class="btn btn-danger mt-1 mb-1 button" href="{% url 'post-create' %}">Create New Post</a>
+    </div>
+
     <div class="content-section" id="posting-list">
 
         {% for post in posts %} <!-- Loops through the posts -->
