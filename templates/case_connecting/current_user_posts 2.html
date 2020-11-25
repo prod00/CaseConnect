@@ -1,0 +1,70 @@
+{% extends "case_connecting/base.html" %}
+{% block content %}
+    <head>
+    <style>
+        a[id="activity-link"] {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+    <!-- Side navigation -->
+    <div class="sidenav">
+      <a href="{% url 'case_connecting-applications' %}">Applications</a>
+      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
+      <a href="{% url 'case_connecting-saved' %}">Saved</a>
+      <a href="{% url 'case_connecting-posts' %}">Posts</a>
+    <a href="{% url 'case_connecting-chats' %}">Messages</a>
+    </div>
+
+    <div class="content-section" id="posting-list" align="center">
+        <div style="text-align: center;">
+            <h1 style="color: #0a304e;">Your Posts</h1>
+            <br>
+        </div>
+
+        {% if not posts %}
+            <div style="text-align: center;">
+                <h2>No Posts Have Been Made</h2>
+            </div>
+        {% endif %}
+
+    <div class="content-section" id="posting-list" align="center">
+
+        {% for post in posts %} <!-- Loops through the posts -->
+            <article id="post" class="media content-section" align="left">
+            <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
+                  <div class="media-body">
+                    <div class="article-metadata">
+                      <a class="mr-2">{{ post.recruiter.get_full_name }}</a>
+                      <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.position }}</a></h2>
+                      <h4>Experience with: {{ post.knowledge }}</h4>
+                      <p class="article-content">Pay: {{ post.pay }}</p>
+                  </div>
+
+                </article>
+        {% endfor %}
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                {% if page_obj.previous_page_number == 1 %}
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href = "?page=1">First Page</a>
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.previous_page_number }}">Previous Page</a>
+                {% endif %}
+            {% endif %}
+            {% if page_obj.has_next %}
+                {% if page_obj.next_page_number == page_obj.paginator.num_pages %}
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+                {% else %}
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.next_page_number }}">Next Page</a>
+                    <a class="btn btn-outline-info mb-4" href = "?page={{ page_obj.paginator.num_pages }}">Last Page</a>
+                {% endif %}
+
+            {% endif %}
+
+        {% endif %}
+    </div>
+{% endblock %}

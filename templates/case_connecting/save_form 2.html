@@ -1,0 +1,30 @@
+{% extends "case_connecting/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<head>
+
+    <style>
+        a[id="register-link"] {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+<div class="content-section" style="background-color: #ccc; border: none;">
+<form id="save_form" method="post">
+    {% csrf_token %}
+    <fieldset class="form-group">
+
+        {{ form|crispy }}
+    </fieldset>
+    <div class="form-group" style="visibility: hidden;">
+        <button class="btn btn-outline-info" type="submit">
+            Save
+        </button>
+        <script>
+        document.getElementById("save_form").submit();
+        </script>
+    </div>
+</form>
+</div>
+{% endblock %}
