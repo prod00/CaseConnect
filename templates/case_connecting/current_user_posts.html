@@ -1,38 +1,26 @@
 {% extends "case_connecting/base.html" %}
+{% load static %}
 {% block content %}
-    <head>
-    <style>
-        a[id="activity-link"] {
-            background-color: #555;
-            color: white;
-        }
-    </style>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/activity.css' %}">
 </head>
-    <!-- Side navigation -->
-    <div class="sidenav">
-      <a href="{% url 'case_connecting-applications' %}">Applications</a>
-      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
-      <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Posts</a>
-    <a href="{% url 'case_connecting-chats' %}">Messages</a>
-    </div>
 
-    <div class="content-section" id="posting-list" align="center">
-        <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Your Posts</h1>
+    <div class="content-section" id="posting-list">
+        <div>
+            <h1>Your Posts</h1>
             <br>
         </div>
 
         {% if not posts %}
-            <div style="text-align: center;">
-                <h2>No Posts Have Been Made</h2>
+            <div>
+                <h2 class="none-to-show">No Posts Have Been Made</h2>
             </div>
         {% endif %}
 
-    <div class="content-section" id="posting-list" align="center">
+    <div class="content-section" id="posting-list">
 
         {% for post in posts %} <!-- Loops through the posts -->
-            <article id="post" class="media content-section" align="left">
+            <article id="post" class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
                   <div class="media-body">
                     <div class="article-metadata">

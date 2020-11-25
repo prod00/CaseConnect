@@ -10,7 +10,16 @@ body {
   color: #0a304e;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.text {
+  color: #0a304e;
+}
+
+h1 {
+  color: #0a304e;
+  text-align: center;
+}
+
+h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
@@ -34,8 +43,14 @@ ul {
   font-weight: 500;
 }
 
-.search-bar{
+.navbar {
+  background-color: #0a304e;
+}
+.navbar-nav {
+  height: 40px;
+}
 
+.search-bar{
   max-width: 500px;
   width: 100%;
 }
@@ -99,17 +114,15 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
-
 article[id="post"] {
-   padding: 15px;
-   box-shadow: 3px 3px 3px grey;
-   background-color: #f5f5f5;
-   width: 700px;
+  padding: 15px;
+  box-shadow: 3px 3px 3px grey;
+  background-color: #f5f5f5;
 }
 
 div[id="posting-list"] {
-   background-color: #ccc;
-   border: none;
+  background-color: #ccc;
+  border: none;
 }
 
 .d-flex {
@@ -124,35 +137,6 @@ div[id_q] {
   width: 75%;
 }
 
-/* The sidebar menu */
-.sidenav {
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 19%; /* Stay at the top */
-  left: 1%;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding: 20px 10px 20px 5px;
-}
-
-/* The navigation menu links */
-.sidenav a {
-  padding: 6px 16px 6px 16px;
-  margin: 12px 8px 6px 16px;
-  border-radius: 2px;
-  box-shadow: 3px 3px 3px grey;
-  background-color: #0a304e; /* Black */
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
-  background-color: #003399;
-}
-
 /* Style page content */
 .main {
   margin-left: 160px; /* Same as the width of the sidebar */
@@ -165,19 +149,95 @@ div[id_q] {
   .sidenav a {font-size: 18px;}
 }
 
-
 div[id="filter"] {
-    position: fixed;
+  position: fixed;
 }
 
 .button {
-    color: white;
-    background-color: #0a304e;
-    border: 1px solid white;
+  color: white;
+  background-color: #0a304e;
+  border: 1px solid white;
 }
 
 .button:hover {
-    color: #0a304e;
-    background-color: #DCDCDC;
-    border: 1px solid #0a304e;
+  color: #0a304e;
+  background-color: #DCDCDC;
+  border: 1px solid #0a304e;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.confirm-delete {
+  padding: 15px;
+  box-shadow: 3px 3px 3px grey;
+  background-color: #f5f5f5;
+}
+
+.back {
+  background-color: #ccc;
+  border: none;
+}
+
+.none-to-show {
+  text-align: center;
+}
+
+div[id="filter"] {
+  background-color: #0a304e;
+  border: none;
+  box-shadow: 3px 3px 3px black;
+}
+
+input[id="id_q"] {
+  width: 100%;
+  height: 10px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #ccc;
+  padding: 15px 5px 15px 5px;
+  vertical-align: middle;
+}
+
+input[id="id_q"]:focus {
+  background-color: white;
+}
+
+h3[id="filtertext1"] {
+  color: white;
+}
+
+p[id="filtertext2"] {
+  color: #DCDCDC;
+}
+
+div[id="savebtn"] {
+  visibility: hidden;
+}
+
+a[id="send-new"] {
+  float: right;
+  clear: both;
 }

@@ -1,42 +1,24 @@
 {% extends "case_connecting/base.html" %}
+{% load static %}
 {% block content %}
 <head>
-    <style>
-        a[id="activity-link"] {
-            background-color: #555;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/activity.css' %}">
 </head>
-    <!-- Side navigation -->
-    <div class="sidenav">
-      <a href="{% url 'case_connecting-applications' %}">Applications</a>
-      <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
-      <a href="{% url 'case_connecting-saved' %}">Saved</a>
-      <a href="{% url 'case_connecting-posts' %}">Posts</a>
-    <a href="{% url 'case_connecting-chats' %}">Messages</a>
-    </div>
 
-    <div class="content-section" id="posting-list" align="center">
-        <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Position: {{ chats.0.app.post.position }}</h1>
+    <div class="content-section" id="posting-list">
+        <div>
+            <h1>Position: {{ chats.0.app.post.position }}</h1>
             <br>
         </div>
 
         {% if not chats %}
-            <div style="text-align: center;">
-                <h2>No Messages Have Been Received</h2>
+            <div>
+                <h2 class="none-to-show">No Messages Have Been Received</h2>
             </div>
         {% endif %}
 
-        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'case_connecting-chats' %}">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-chat-applicant' chats.0.app.id %}">Send New Message</a>
-
-
-
-
         {% for chat in chats %} <!-- Loops through the posts -->
-        <article id="post" class="media content-section" align="left">
+        <article id="post" class="media content-section">
         <img class="rounded-circle article-img" src="{{ chat.sender.profile.image.url }}">
             <div class="media-body">
                 <div class="article-metadata">
@@ -52,7 +34,7 @@
             </article>
         {% endfor %}
 
-        <article id="post" class="media content-section" align="left">
+        <article id="post" class="media content-section">
         <img class="rounded-circle article-img" src="{{ chats.0.app.applicant.profile.image.url }}">
             <div class="media-body">
                 <div class="article-metadata">
@@ -66,12 +48,6 @@
             </div>
 
         </article>
-
-
-
-
-
-
 
         {% if is_paginated %}
             {% if page_obj.has_previous %}
@@ -93,6 +69,10 @@
             {% endif %}
 
         {% endif %}
+
+        <a class="btn btn-danger mt-1 mb-1 button" href="{% url 'case_connecting-chats' %}">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-danger mt-1 mb-1 button" id="send-new" href="{% url 'post-chat-applicant' chats.0.app.id %}">Send New Message</a>
+
     </div>
 
 

@@ -1,13 +1,13 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
-    <div class="content-section" id="posting-list" align="center">
+    <div class="content-section" id="posting-list">
         <div style="text-align: center;">
                 <h1>{{ posts.0.recruiter.get_full_name }}'s Job Posts</h1>
                 <h4>User ID: {{ view.kwargs.username }} </h4>
                 <h4>Jobs Available: {{ page_obj.paginator.count }}</h4>
         </div>
         {% for post in posts %} <!-- Loops through the posts -->
-            <article id="post" class="media content-section" align="left">
+            <article id="post" class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
                   <div class="media-body">
                     <div class="article-metadata">

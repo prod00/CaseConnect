@@ -23,7 +23,7 @@
     <!-- Navbar Left Side -->
     <header class="site-header">
 
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #0a304e;">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
           <a class="navbar-brand mr-4" href="{% url 'case_connecting-home' %}">Case Connect</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,16 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
+                    <div class="dropdown">
                     <a id="activity-link" class="nav-item nav-link" href="{% url 'case_connecting-applications' %}">Your Activity</a>&nbsp;
+                        <div class="dropdown-content">
+                            <a href="{% url 'case_connecting-applications' %}">Applications</a>
+                            <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
+                            <a href="{% url 'case_connecting-saved' %}">Saved</a>
+                            <a href="{% url 'case_connecting-posts' %}">Posts</a>
+                            <a href="{% url 'case_connecting-chats' %}">Messages</a>
+                        </div>
+                    </div>
                     <a id="create-link" class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>&nbsp;
                     <a id="profile-link" class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>&nbsp;
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>&nbsp;

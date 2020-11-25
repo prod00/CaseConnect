@@ -1,46 +1,21 @@
 {% extends "case_connecting/base.html" %}
 {% block content %}
 
-    <head>
-    <style>
-        a[id="home-link"] {
-            background-color: #555;
-            color: white;
-        }
-
-        input[id="id_q"] {
-              width: 100%;
-              height: 10px;
-              box-sizing: border-box;
-              border: 2px solid #ccc;
-              border-radius: 4px;
-              background-color: #ccc;
-              padding: 15px 5px 15px 5px;
-              vertical-align: middle;
-        }
-
-        input[id="id_q"]:focus {
-              background-color: white;
-        }
-    </style>
-    </head>
-
-
-    <div class="content-section" id="posting-list" align="center">
-        <div style="text-align: center;">
-            <h1 style="color: #0a304e;">Filtered Jobs</h1>
+    <div class="content-section" id="posting-list">
+        <div>
+            <h1>Filtered Jobs</h1>
         </div>
 
     {% if not posts %}
-        <div style="text-align: center;">
-                <h2>No Posts Match The Filtered Search</h2>
+        <div>
+            <h2 class="none-to-show">No Posts Match The Filtered Search</h2>
         </div>
     {% endif %}
 
 
 
         {% for post in posts %} <!-- Loops through the posts -->
-        <article class="media content-section" id="post" align="left">
+        <article class="media content-section" id="post">
         <img class="rounded-circle article-img" src="{{ post.recruiter.profile.image.url }}"> <!-- Side image -->
               <div class="media-body">
                 <div class="article-metadata">
