@@ -41,7 +41,6 @@ class ApplicationTest(TestCase):
         post.pay = "$10 an hour"
         post.date_posted = timezone.now()
         post.save()
-
         mike_post = Post.objects.get(pk=1)
 
         application = Application()
@@ -69,14 +68,11 @@ class SaveTest(TestCase):
         post.pay = "$10 an hour"
         post.date_posted = timezone.now()
         post.save()
-
         mike_post = Post.objects.get(pk=1)
 
         alex_user = User.objects.create(username="alexrodriguez", password="alex-2018!",
                                         email="alex@gmail.com", first_name="Alex", last_name="Rodriguez")
-
         save = Save()
-
         save.user = alex_user
         save.post = mike_post
         save.date_saved = timezone.now()
