@@ -279,3 +279,37 @@ def search(request):
         'posts': posts
     }
     return render(request, template, context)
+
+
+# from django.test import TestCase
+# from case_connecting.models import Post, Application, Save, User
+# from django.utils import timezone
+#
+# class PostTest(TestCase):
+#     def setUp(self):
+#         pass
+#     def test_x(self):
+#         self.assertEquals(True, True)
+
+    # def test_user(self):
+    #     user = User.objects.create(username="mikeobrien", password="mikey-2017!",
+    #                                     email="mike@gmail.com", first_name="Mike", last_name="Obrien")
+    #     print(user)
+    #     self.assertEquals(user.username, "mikeobrien")
+    # def test_fields(self):
+    #     post = Post()
+    #     user = User.objects.create(username="mikeobrien", password="mikey-2017!",
+    #                                email="mike@gmail.com", first_name="Mike", last_name="Obrien")
+    #     post.recruiter = user
+    #     post.position = "TA"
+    #     post.content = "Teaching assistant for MATH 201"
+    #     post.knowledge = "MATH 201"
+    #     post.pay = "$10 an hour"
+    #     post.date_posted = timezone.now()
+    #     post.save()
+    #
+    #     record = Post.objects.get(pk=1)
+    #     self.assertEquals(record, post)
+
+
+

@@ -40,7 +40,7 @@
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
                     <div class="dropdown">
-                    <a id="activity-link" class="nav-item nav-link" href="{% url 'case_connecting-applications' %}">Your Activity</a>&nbsp;
+                    <a id="activity-link" class="nav-item nav-link">Your Activity</a>&nbsp;
                         <div class="dropdown-content">
                             <a href="{% url 'case_connecting-applications' %}">Applications</a>
                             <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
