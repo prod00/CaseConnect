@@ -11,8 +11,6 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.get_full_name()} Profile'
 
-    def get_full_name(self):
-        return self.get_full_name()
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
