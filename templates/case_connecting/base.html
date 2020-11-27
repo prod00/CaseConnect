@@ -40,7 +40,7 @@
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
                     <div class="dropdown">
-                    <a id="activity-link" class="nav-item nav-link">Your Activity</a>&nbsp;
+                    <a id="activity-link" class="nav-item nav-link">Activity</a>&nbsp;
                         <div class="dropdown-content">
                             <a href="{% url 'case_connecting-applications' %}">Applications</a>
                             <a href="{% url 'case_connecting-applicants' %}">Applicants</a>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    <a id="profile-link" class="nav-item nav-link" href="{% url 'profile' %}">My Profile</a>&nbsp;
+                    <a id="profile-link" class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>&nbsp;
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>&nbsp;
                 {% else %}
                     <a id="login-link" class="nav-item nav-link" href="{% url 'login' %}">Log In</a>&nbsp;
