@@ -14,3 +14,14 @@ class ProfileTest(TestCase):
         record = Profile.objects.get(pk=1)
         self.assertEquals(record, profile)
 
+    def test__str__(self):
+        mike_user = User.objects.create(username="mikeobrien", password="mikey-2017!",
+                                        email="mike@gmail.com", first_name="Mike", last_name="Obrien")
+        profile = Profile()
+        profile.id = 1
+        profile.user = mike_user
+        profile.save()
+
+        self.assertEquals(profile.__str__(), str(profile.user.get_full_name())+" Profile")
+
+
