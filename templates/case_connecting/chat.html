@@ -1,7 +1,10 @@
 {% extends "case_connecting/base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
-
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'case_connecting/activity.css' %}">
+</head>
 <div class="content-section back">
 <form method="post">
     {% csrf_token %}
