@@ -1,7 +1,6 @@
 from django.test import TestCase
 from case_connecting.models import Post, Application, Save, User, Chat
 from django.utils import timezone
-from django.urls import reverse
 
 class PostTest(TestCase):
     def test_user(self):

@@ -17,24 +17,26 @@ class UserRegisterForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=15, required=True)
     last_name = forms.CharField(max_length=15, required=True)
-    email = forms.EmailField(required=True)
+    #email = forms.EmailField(required=True)
+
 
     # username = forms.CharField()
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'email']
+        fields = ['first_name', 'last_name', 'username']
 
 
 class ProfileUPdateForm(forms.ModelForm):
+    resume = forms.FileField(required=False)
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['image', 'resume']
 
-class ResumeUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['resume']
+# class ResumeUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ['resume']
 
 
 
