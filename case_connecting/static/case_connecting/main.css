@@ -46,9 +46,8 @@ ul {
 .navbar {
   background-color: #0a304e;
 }
-.navbar-nav {
-  height: 40px;
-}
+
+
 
 .search-bar{
   max-width: 500px;
@@ -65,6 +64,7 @@ form {
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
+  overflow: auto;
 }
 
 .article-title {
@@ -115,6 +115,7 @@ a.article-title:hover {
 }
 
 article[id="post"] {
+    clear: both;
   padding: 15px;
   box-shadow: 3px 3px 3px grey;
   background-color: #f5f5f5;
@@ -165,13 +166,20 @@ div[id="filter"] {
   border: 1px solid #0a304e;
 }
 
+.dropdown {
+  float: left;
+  clear: both;
+}
+
 .dropdown-content {
+  margin: auto;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  right: 0;
+  top: 100%;
 }
 
 .dropdown-content a {
@@ -179,6 +187,8 @@ div[id="filter"] {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  text-align: center;
+
 }
 
 .dropdown-content a:hover {
@@ -237,7 +247,11 @@ div[id="savebtn"] {
   visibility: hidden;
 }
 
-a[id="send-new"] {
-  float: right;
-  clear: both;
+.navbar-nav {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.nav-item {
+  display: inline-block;
 }
