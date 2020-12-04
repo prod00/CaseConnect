@@ -11,7 +11,9 @@
             <br>
         </div>
 
-
+        <a class="btn btn-secondary mt-1 mb-1 " href="{% url 'case_connecting-chats' %}">Back To Chats</a>
+        <a class="btn btn-danger mt-1 mb-1 button" id="send-new" href="{% url 'post-chat-applicant' chats.0.app.id %}">Send New Message</a>
+        <br><br>
 
         {% for chat in chats %} <!-- Loops through the posts -->
         <article id="post" class="media content-section">
@@ -45,9 +47,6 @@
 
         </article>
 
-        <a class="btn btn-danger mt-1 mb-1 button" id="send-new" href="{% url 'post-chat-applicant' chats.0.app.id %}">Send New Message</a>
-        <br>
-        <a class="btn btn-secondary mt-1 mb-1 " href="{% url 'case_connecting-chats' %}">Back To Chats</a>
 
     </div>
 
