@@ -20,7 +20,6 @@ class UserUpdateForm(forms.ModelForm):
     #email = forms.EmailField(required=True)
 
 
-    # username = forms.CharField()
 
     class Meta:
         model = User
@@ -33,10 +32,6 @@ class ProfileUPdateForm(forms.ModelForm):
         model = Profile
         fields = ['image', 'resume']
 
-# class ResumeUpdateForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         fields = ['resume']
 
 
 

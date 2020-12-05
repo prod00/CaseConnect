@@ -24,28 +24,21 @@ def profile(request):
         p_form = ProfileUPdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.profile,)
-        # r_form = ResumeUpdateForm(request.POST,
-        #                           request.FILES,
-        #                           instance=request.user.profile)
-        # and r_form.is_valid()
 
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            # r_form.save()
             messages.success(request, 'Your account has been updated.')
             return redirect('profile')
 
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUPdateForm(instance=request.user.profile)
-       # r_form = ResumeUpdateForm(instance=request.user.profile)
 
     username = request.user.username
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        #'r_form': r_form,
         # either make usernames unique or change this to email and make email required
 
     }

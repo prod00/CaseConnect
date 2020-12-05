@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 class Post(models.Model):
-    # things to add: deadline, how many people applied, user name
+    # things to add: deadline, how many people applied,
     recruiter = models.ForeignKey(User, on_delete=models.CASCADE)
     position = models.CharField(max_length=200)
     knowledge = models.CharField(max_length=200)
@@ -15,7 +15,6 @@ class Post(models.Model):
 
     def __str__(self):
         template = 'Recruiter: {0.recruiter}, Position: {0.position}, Post Date: {0.date_posted}'
-        #return self.recruiter, self.position, self.date_posted.date()
         return template.format(self)
 
     def get_absolute_url(self):
