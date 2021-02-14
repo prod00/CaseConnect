@@ -6,4 +6,4 @@ After registering using the tab to the right, users can create posts containing 
 Users can filter through the posted jobs on the home page to find the job that best fits them. 
 
 Best of luck, 
-Dillon Beal, Sohan Bhawtankar, Meira Farhi, and Paul Rodriguez
+Paul Rodriguez and Meira Farhi
